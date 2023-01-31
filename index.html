@@ -115,7 +115,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab 1</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab 1: Artemis</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -124,8 +124,49 @@
                                     </div>
                                     <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="Lab 1"/>
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                    <p class="mb-5">The goal of this lab is to connect our Artemis board to a computer and test out a few examples to ensure proper functionality.</p>
+
+                                    <h5>Hardware</h5>
+                                    <ul>
+                                        <li>SparkFun RedBoard Artemis Nano: Fully compatible with the Arduino suite, the Artemis Nano will be how we communicate with our robot this semester. The product page can be viewed <a href="https://www.sparkfun.com/products/15443">here</a> </li>
+                                        <li>Type C to A adapter: I used a type C to A adapter from the lab to connect the Artemis to the lab PC via its type C port.</li>
+                                      </ul>
+
+                                    <h5>Software</h5>
+                                    <ul>
+                                        <li>Arduino IDE: We use the Arduino Integrated Development Environment, a text editor with features helpful in programming Arduino hardware, to test the provided examples on our Artemis. Arduino can be downloaded from <a href="https://www.arduino.cc/en/software">here</a> </li>
+                                    </ul>
+
+                                    <h5>Examples</h5>
+                                    <p class="mb-5">This lab included the uploading of 4 example files to our board: Blink, Serial, Analog Read, and MicrophoneOutput.</p>
+                                    <h6>Blink</h6>
+                                    <p class="mb-5">This is a video of the blink example. The given file simply blinks the built-in LED on and off.</p>
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/46qBRbYKVnc" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <br>
+                                    <h6>Serial</h6>
+                                    <p class="mb-5">This is a video of the serial example. It tests the serial communication between the Artemis board and a computer. I was able to input characters on the keyboard and have them echo out from the Artemis.</p>
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/l72lh3TIS6M" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <br>
+                                    <h6>Analog Read</h6>
+                                    <p class="mb-5">These are two videos of the analog read example. The first shows the full output given which includes the temperature as well as the VCC and VSS voltage readings. I edited the code to only show the temperature for clearer visual testing. I did this by changing the printf statement in the default code to <code>Serial.printf(temp_f);</code> </p>
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/jlJb7wvE9EE" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/3plgoMk17YE" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <br>
+                                    <h6>Microphone Output</h6>
+                                    <p class="mb-5">This example shows the Microphone Output. Using a pulse-density microphone, the apollo3 is able to detect sound and output the frequency. I whistle in order to trigger a frequency change for testing.</p>
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/Fo225k17FGA" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window </button>
                                 </div>
                             </div>
                         </div>
