@@ -92,7 +92,7 @@
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i
                                     class="fas fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="assets/img/portfolio/cake.png" alt="Tasty Cake" />
+                        </div><img class="img-fluid" src="assets/img/portfolio/r2d2.png" alt="r2d2" />
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-5">
@@ -410,8 +410,10 @@
                                 <p class="mb-5"></p>
                                 While the artemis is a pretty cool chip, it is heavily limited by the amount of data it
                                 can send over. Lets say for example you wanted to store 5 seconds of 16 bit values taken
-                                at 150hz. This would be equivalenbt to 2400 bits every second. The Artemis only contains 384kb of ram which is equivalent to 3072000 bits. At
-                                the rate given we would only be able to send 256 of these 5 second groups, thats not that much!
+                                at 150hz. This would be equivalenbt to 2400 bits every second. The Artemis only contains
+                                384kb of ram which is equivalent to 3072000 bits. At
+                                the rate given we would only be able to send 256 of these 5 second groups, thats not
+                                that much!
                                 </p>
                                 <br>
 
@@ -435,7 +437,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary mb-0">Tasty Cake</h2>
+                                <h2 class="portfolio-modal-title text-secondary mb-0">Lab 2: Bluetooth</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -443,48 +445,143 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5"
-                                    src="assets/img/portfolio/cake.png" alt="Tasty Cake" />
+                                    src="assets/img/portfolio/r2d2.png" alt="r2d2" />
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
+                                <p class="mb-5">The goal of this lab is to connect our Artemis board to two
+                                    Time-of-Flight sensors through a QWIIC connector and test the functionality of these
+                                    sensors. This will be used so our robot can sense its surroundings</p>
+
+                                <h5>Hardware</h5>
+                                <ul>
+                                    <li><b> Time of Flight sensors</b>: The final robot will include two of these
+                                        sensors (although there is a caveat that I will discuss in my software section).
+                                        There are many possible configurations for the sensors with each being
+                                        able to pick from 4 main locations: Front, left, right, back. With a FOV of only
+                                        27° its not possible to cover all angles. My current plan is
+                                        to put one sensor on the front and another on one of the sides. I believe this
+                                        is optimal as it stops the robot from running into obstacles moving forward and
+                                        allows the robot to focus on a singular side for most of its tricks. This
+                                        however will cause us to miss obstacles from the back and other side. I included
+                                        a masterpiece drawing below: </li>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/sensor_placement.png"
+                                        alt="sensor_placement" />
+
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/wiring.png"
+                                        alt="sensor_placement" />
+                                    <li><b> QWIIC breakout board</b>: We utilized a QWICC brekaout board in order to
+                                        provide more connections for our sensors. The wiring is pictured here </li>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/qwicc_connection.jpg"
+                                        alt="sensor_placement" />
+                                </ul>
+
+                                <h5>Software</h5>
+                                <ul>
+                                    <li><b>I2C </b>: The main communication protocall we will be looking at this lab is
+                                        Inter-Integrated Circuit communications (I2C). I2C is special in that it has
+                                        features from both SPI and UART (Other communication protocalls) and it only
+                                        uses two wires to communicate. Serial Data (SDA) sends and recieves data while
+                                        Serial Clock (SCL) carries the clock signal. The default I2C address for our
+                                        VL53L1X should be 0x52 but upon scanning our ports we see that it is 0x29. This
+                                        is because the address is bit shifted. The library page can be viewed <a
+                                            href="https://jupyter.org/">here</a>
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab3/scanning_ports.png"
+                                            alt="scanning_ports" />
+
+                                    </li>
+
+                                </ul>
+
+
+                                <h5>Lab Tasks</h5>
+                                <p>This lab included completing the following tasks:</p>
+                                <ul>
+                                    <li align="left">Sensor test </li>
+                                    <li align="left">2 ToF sensors </li>
+                                    <li align="left">ToF sensor speed </li>
+                                    <li align="left">Time v Distance </li>
+                                </ul>
+
+                                <h6>Sensor test</h6>
+                                <p class="mb-5"> Our ToF sensor allows for 3 different modes for short, medium, and long
+                                    respectively. I decided to use short distance mode as the purpose of our robot is to
+                                    do stunts and it cares most about what is immidaitely around it. While medium and
+                                    long distance mode would provide support for seeing objects farther away, it
+                                    suffers in lit enviornments. Since we dont really need much range but that lab is a
+                                    lit enviornment, this furthers my resolve to go with short range senseing. The max
+                                    range I was able to get with this mode was 1932 mm by pointing my ToF sensor to a
+                                    white wall and slowly walking away.
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/maxrange.png"
+                                        alt="maxrange" />
                                 </p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal"><i
-                                        class="fas fa-times fa-fw"></i>Close Window</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog"
-        aria-labelledby="#portfolioModal3Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
-                            class="fas fa-times"></i></span></button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary mb-0">Circus Tent</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5"
-                                    src="assets/img/portfolio/circus.png" alt="Circus Tent" />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
+                                <p class="mb-5">Since I did not have a tape measure on me, I utilized my ipad as a
+                                    measuring tape and setup my tests by measuring the distance to a wall using the ToF
+                                    sensors and comparing the results to my measurements with the iPad. I started off
+                                    about 50mm from the wall and moved back untill I reached 200mm
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/testbed.jpg"
+                                        alt="testbed" />
                                 </p>
+
+                                <p class="mb-5">I utilized the default code and analzed the measurements after. Overall
+                                    my measurements were very percise and any error in my graph can probably be
+                                    explained by human error (non perfect intervals of measurement). On the X axis I
+                                    have the actual distance (in mm) and on the Y axis I have the measured distance. A
+                                    perfectly straight line would repersent perfect measurements. In order to test
+                                    repeatability, I conducted 2 different tests as seen with the green and blue lines
+                                    on the graph.
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/graph.png" alt="graph" />
+
+                                <p class="mb-5">Finally, I also tested the ranging time to be 1706 microseconds
+                                    utilizing the following code:
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/339b8c631c3aeb6bd263b7c493df05db.js"></script>
+                                </p>
+                                <br>
+
+                                <h6>2 ToF sensors</h6>
+                                <p class="mb-5">The next step was to solder and attach an additional time of flight
+                                    sensor to my system:
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/two_tof.jpg"
+                                        alt="two_tof" />
+                                </p>
+                                <p class="mb-5">In order to get this working in software I connected (temporarily) a
+                                    wire between
+                                    the XSHUT pin on my left ToF sensor and the GPIO_8 pin on my artemis. This allows me
+                                    to shutdown one of the sensors change the others address before
+                                    reenabling the first sensor and allowing my two sensors to work in parallel
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/xshut.png" alt="xshut" />
+                                </p>
+                                <br>
+
+                                <h6>ToF sensor speed</h6>
+                                <p class="mb-5"> Getting the code to run quickly is very important, this means that our
+                                    sensor data must come in as fast as possible. Here I include code that rapidly
+                                    prints the artemis clock and at the same time prints ToF data from the two sensors
+                                    when they are available. My loop runs at 8 ms per iteration. The limiting
+                                    factor is definitely the sensor as shown in the picture. Below I included a picture
+                                    of the reuslts as well as the code:
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/limiting.png"
+                                        alt="limting" />
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/47ea725d41bbf9e99ef71ed454beac47.js"></script>
+
+                                </p>
+
+                                <br>
+
+                                <h6>Time v Distance</h6>
+                                <p class="mb-5"> Here we record time-stamped ToF data for 5 seconds and send it to a
+                                    computer using bluetooth. I edited the bluetooth code from lab 2 by adding a command
+                                    for the ToF sensor. The code as well as a graph of a run is shown below. For the
+                                    graph I only included timestamps with information from both sensors. The X axis is
+                                    time in miliseconds and the Y axis is distance in milimeters.
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/a89dfd46d42bc308905842a55d119e5b.js"></script>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/graph2.png" alt="graph2" />
+                                </p>
+                                <br>
+
                                 <button class="btn btn-primary" href="#" data-dismiss="modal"><i
-                                        class="fas fa-times fa-fw"></i>Close Window</button>
+                                        class="fas fa-times fa-fw"></i>Close Window </button>
                             </div>
                         </div>
                     </div>
