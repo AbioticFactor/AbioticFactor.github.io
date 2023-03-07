@@ -95,13 +95,22 @@
                         </div><img class="img-fluid" src="assets/img/portfolio/r2d2.png" alt="r2d2" />
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-5">
+                <!-- <div class="col-md-6 col-lg-4 mb-5">
                     <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i
                                     class="fas fa-plus fa-3x"></i></div>
                         </div><img class="img-fluid" src="assets/img/portfolio/IMU.png" alt="IMU" />
+                    </div>
+                </div> -->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i
+                                    class="fas fa-plus fa-3x"></i></div>
+                        </div><img class="img-fluid" src="assets/img/portfolio/hbridge.jpg" alt="hbridge" />
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-5">
@@ -113,7 +122,7 @@
                         </div><img class="img-fluid" src="assets/img/portfolio/safe.png" alt="Locked Safe" />
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-5">
+                <!-- <div class="col-md-6 col-lg-4 mb-5">
                     <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
@@ -121,7 +130,7 @@
                                     class="fas fa-plus fa-3x"></i></div>
                         </div><img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -600,7 +609,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary mb-0">Lab 4: IMU</h2>
+                                <h2 class="portfolio-modal-title text-secondary mb-0">Lab 5: Open Loop Control</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -608,329 +617,474 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5"
-                                    src="assets/img/portfolio/IMU.png" alt="IMU" />
+                                    src="assets/img/portfolio/hbridge.jpg" alt="hbridge" />
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to connect our Artemis board to an inertial
-                                    measurement unit sensor through a QWIIC connector and test the functionality of
-                                    thes sensors. After that we will get our robot battery connected and finally get our
-                                    robot up and running</p>
+                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
+                                    open loop control using the artemis. This rquires the addition of two motor controllers
+                                     to our board</p>
 
                                 <h5>Hardware</h5>
                                 <ul>
-                                    <li><b>9 DOF IMU sensor</b>: This lab utilized a 9 degree of freedom inertial
-                                        measurement unit sensor. This sensor is capable of recording acceleration and
-                                        Gyroscope data. Its datasheet can be seen <a
+                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a DRV8833 Dual
+                                        H-Bridge Motor Driver. Its data sheet can be found <a
                                             href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
+                                        This driver is capable of driving either two DC motors or
+                                        one stepper motor. For our purposes, we
+                                        will elect to drive two DC motors. One important note is that we will use a
+                                        seperate battery to power the motors and the motor controllers. This is mainly to
+                                        reduce the noise betwwen the motors and the artemis.
                                         I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/IMU_placement.png"
-                                        alt="IMU_placement" />
-
-                                    <li><b> QWIIC breakout board</b>: We utilized a QWICC brekaout board in order to
-                                        provide more connections for our sensors. </li>
-                                </ul>
-
-                                <h5>Software</h5>
-                                <ul>
-                                    <li><b>IMU</b>: I ran the IMU example code and got the result shown below. When
-                                        analyzing the measurements for accelermoter and gyroscope, I was surprised as to
-                                        how noisy the Accelerometer data was when moving the IMU. The data from the
-                                        gyroscope was far more
-                                        stable.
-
-                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/IMU_graphs.png"
-                                            alt="IMU_graphs" />
-
-                                        One notable variable in the example code was AD0_VAL. This can either be set to
-                                        0 or 1 depending on
-                                        whether or not the ADR jumper was wired on the IMU. We use the default value of
-                                        1 as we did not connect the specified jumper.
-
-                                    </li>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
+                                        alt="Hbridge_wiring" />
+                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are easily
+                                    accessible with my current coniguration.
 
                                 </ul>
-
 
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Accelerometer Test </li>
-                                    <li align="left">Gyroscope Test </li>
-                                    <li align="left">Sampling Data </li>
-                                    <li align="left">Battery Connection </li>
-                                    <li align="left">Stunt Recording </li>
+                                    <li align="left">Oscilloscope Test </li>
+                                    <li align="left">Spin Test </li>
+                                    <li align="left">double spin test </li>
+                                    <li align="left">Calibration </li>
+                                    <li align="left">Open Loop </li>
                                 </ul>
 
-                                <h6>Accelerometer Test</h6>
-                                <p class="mb-5"> Using the equations for pitch and roll from lecture:
+                                <h6>Oscilloscope Test</h6>
+                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power supply and
+                                    oscilliscope as shown below:
                                     <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/pr_eq.png" alt="pr_eq" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
+                                        alt="posetup" />
                                     <br>
-                                    I recorded a test below showing the output at {-90, 0, 90} degrees (value 2 = pitch,
-                                    value 3 = roll). I have found the values to be extremely accurate with a maximum
-                                    2.35 degree difference from the expected value
+                                    I utilized the below code to test the functionality of the boards:
+                                    <script src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/zMCA174yVVA"
-                                        frameborder="0" allowfullscreen></iframe>
+
                                 </p>
-                                <p class="mb-5">One key fact noted earlier, and one clearly seen in the above video, is
-                                    that the accelerometer data contains a lot of noise when moving. This noise would be
-                                    amplified even
-                                    further when running the RC car in its vicinity. I collected 106 samples of 21.2 mhz
-                                    data by sending information over bluetooth. I analyze this noise through a
-                                    fourier transform. I include fft data for both pitch and roll, I additionally
-                                    include the code I used to generate the FFT graphs based on the provided tutorial.
-                                    Looking at the data, there dosent seem to
-                                    be much of a frequency spike which is a
-                                    result of a low pass filter on the chip by default (according to the datasheet)
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/pitchfft.png"
+                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to generate these two graphs
+                                    enusring my motor drivers worked and I could manipulate the duty cycle.
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
                                         alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/rollfft.png"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
                                         alt="ft_graph" />
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/f9c12dfcd10b6af09a02c067274ebc67.js"></script>
-
                                 </p>
                                 <br>
 
-                                <h6>Gyroscope Test</h6>
-                                <p class="mb-5"> Using the equations for pitch, roll, and yaw from lecture:
+                                <h6>Spin Test</h6>
+                                <p class="mb-5"> After setting up the car on its side as described in the directions I
+                                    was able to use the code below to produce the motors spinning as intended in the
+                                    video below
 
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/b2abebb2dfa5a89af89c20d9d0d01581.js"></script>
-
-                                    I recorded a test below showing the output of the gyroscope (value 2 = pitch,
-                                    value 3 = roll, value 4 = yaw). I found that increasing the sampling frequency led
-                                    to more
-                                    accurate results. I increased the final sampling frequency by a factor of 10 then a
-                                    factor of 100 to test this. I have found the values to be less noisy than
-                                    the equivalent measurements from the accelerometer but after increasing the sampling
-                                    frequency and adding movement, the
-                                    gyroscope quickly suffers from drift. Drift causes the error to quickly accumulate
-                                    to the point where the value drifts away from the expected value significantly. This
-                                    isnt seen in
-                                    accelermoter data.
+                                    <script src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/cClEZ3p5m14"
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
                                         frameborder="0" allowfullscreen></iframe>
-
-
                                 </p>
-                                <p class="mb-5">
+                                <br>
 
-                                    We can remedy our above problem by implementing a complementary filter described
-                                    below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/comp_fil.png"
-                                        alt="comp_fil" />
-                                    This combines data from the accelerometer and the gyroscope to produce both accurate
-                                    and stable data. The implementation for the filter is shown below:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/339b8c631c3aeb6bd263b7c493df05db.js"></script>
-
-                                    As can be seen below, the complimentary filter is a smashing success. My sensor
-                                    values are now usable with no drift or real noise to worry about.
-
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/oXNCeRjO0j0"
+                                <h6>double spin test</h6>
+                                <p class="mb-5"> After fully wiring the car as shown below:
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
+                                        alt="fully_wired" />
+                                    I was able to run the car on the ground:
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
                                         frameborder="0" allowfullscreen></iframe>
-
+                                </p>
+                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible value for the
+                                    car to move forward and on axis turn.
                                 </p>
                                 <br>
 
-                                <h6>Sampling Data</h6>
-                                <p class="mb-5"> After speeding up the code by removing all serial print statements and
-                                    skipping any iterations where data wasnt ready, I was able to get to sample my IMU
-                                    at a
-                                    frequency of 29 ms.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/speed.png" alt="speed" />
-                                    After this I created a notification handler to collect timestamped IMU data and
-                                    store it in an array.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/imuts.png" alt="imuts" />
-                                </p>
-                                <p class="mb-5"> Finally, I capture both my IMU and ToF sensor data with the same
-                                    command. I chose to seperate the data into their own arrays as the ToF data would
-                                    severly bottleneck my IMU data. Using a simmilar structure to my above code I am
-                                    able to capture both IMU and ToF data.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/both.png" alt="both" />
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/52e85e16446a40a28ed57dc751246f99.js"></script>
-
-                                    With my current rate of 64 hz of sampling for IMU data (14 bytes each) and 7 hz
-                                    sampling of ToF
-                                    data (6 bytes each). With the arduino having 393216 bytes on board this means I can
-                                    store data for 960 seconds before my memory is full.
-
+                                <h6>Calibration</h6>
+                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to find a
+                                    callibnration factor. After testing a multitude of values I found that a ratio of
+                                    1.25 right/left side worked the
+                                    best. I tested this by making the robot follow a piece of tape for 7 feet and
+                                    evaluating if it could follow the line. Here you
+                                    can see my robot running in a straight line after calibration.
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
+                                        frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
 
-                                <h6>Battery Connection</h6>
-                                <p class="mb-5"> To prevent noise disturbance, we utilize different batteries for the
-                                    motors and the electronics connected to the Artemis. We use the smaller 650mAh
-                                    battery for our electronics and the bigger 850mAh one for our motors so we wont have
-                                    to charge the battery as often. I soldered JST connectors to the 650mAh battery so I
-                                    can connect it to the Artemis as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/battery.png"
-                                        alt="gyr_output" />
-                                </p>
-                                <br>
-
-                                <h6>Stunt Recording</h6>
-                                <p> class="mb-5"> Playing with the car made me realize just how jittery it is. The robot
-                                    moves very fast and sometimes the commands lag. Attempting to turn is very hard as
-                                    the robot seems to overturn most of the time. I crashed the robot several times.
+                                <h6>Open Loop</h6>
+                                <p class="mb-5"> Finally I used open loop control to manuever my robot with the code
+                                    below and produced the video below using the corresponding code:
+                                    <script src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
+                                    <br>
                                 <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/KURGLvcNtoc"
+
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
                                         frameborder="0" allowfullscreen></iframe>
                                     </p>
-                                    <p class="mb-5"> I recorded again this time with the Artemis. This is a picture of
-                                        the robot all connected:
-                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/autobot.png"
-                                            alt="stunt_graph" />
-                                        And here is a video and a graph of data taken from the robot.
-                                    <div class="embed-container">
-                                        <iframe width="560" height="315" src="https://youtube.com/embed/r8jEX--ZFTY"
-                                            frameborder="0" allowfullscreen></iframe>
-                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/drive_data.png"
-                                            alt="stunt_graph" />
+                                    <br>
 
-                                        </p>
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i
+                                            class="fas fa-times fa-fw"></i>Close Window </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog"
+            aria-labelledby="#portfolioModal3Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab 4: IMU</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5"
+                                        src="assets/img/portfolio/IMU.png" alt="IMU" />
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-5">The goal of this lab is to connect our Artemis board to an
+                                        inertial
+                                        measurement unit sensor through a QWIIC connector and test the functionality
+                                        of
+                                        thes sensors. After that we will get our robot battery connected and finally
+                                        get our
+                                        robot up and running</p>
+
+                                    <h5>Hardware</h5>
+                                    <ul>
+                                        <li><b>9 DOF IMU sensor</b>: This lab utilized a 9 degree of freedom
+                                            inertial
+                                            measurement unit sensor. This sensor is capable of recording
+                                            acceleration and
+                                            Gyroscope data. Its datasheet can be seen <a
+                                                href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
+                                            I wired it to my artemis as shown below: </li>
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/IMU_placement.png"
+                                            alt="IMU_placement" />
+
+                                        <li><b> QWIIC breakout board</b>: We utilized a QWICC brekaout board in
+                                            order to
+                                            provide more connections for our sensors. </li>
+                                    </ul>
+
+                                    <h5>Software</h5>
+                                    <ul>
+                                        <li><b>IMU</b>: I ran the IMU example code and got the result shown below.
+                                            When
+                                            analyzing the measurements for accelermoter and gyroscope, I was
+                                            surprised as to
+                                            how noisy the Accelerometer data was when moving the IMU. The data from
+                                            the
+                                            gyroscope was far more
+                                            stable.
+
+                                            <img class="img-fluid rounded mb-5" src="assets/img/lab4/IMU_graphs.png"
+                                                alt="IMU_graphs" />
+
+                                            One notable variable in the example code was AD0_VAL. This can either be
+                                            set to
+                                            0 or 1 depending on
+                                            whether or not the ADR jumper was wired on the IMU. We use the default
+                                            value of
+                                            1 as we did not connect the specified jumper.
+
+                                        </li>
+
+                                    </ul>
+
+
+                                    <h5>Lab Tasks</h5>
+                                    <p>This lab included completing the following tasks:</p>
+                                    <ul>
+                                        <li align="left">Accelerometer Test </li>
+                                        <li align="left">Gyroscope Test </li>
+                                        <li align="left">Sampling Data </li>
+                                        <li align="left">Battery Connection </li>
+                                        <li align="left">Stunt Recording </li>
+                                    </ul>
+
+                                    <h6>Accelerometer Test</h6>
+                                    <p class="mb-5"> Using the equations for pitch and roll from lecture:
                                         <br>
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/pr_eq.png"
+                                            alt="pr_eq" />
+                                        <br>
+                                        I recorded a test below showing the output at {-90, 0, 90} degrees (value 2
+                                        = pitch,
+                                        value 3 = roll). I have found the values to be extremely accurate with a
+                                        maximum
+                                        2.35 degree difference from the expected value
+                                        <br>
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/zMCA174yVVA"
+                                            frameborder="0" allowfullscreen></iframe>
+                                    </p>
+                                    <p class="mb-5">One key fact noted earlier, and one clearly seen in the above
+                                        video, is
+                                        that the accelerometer data contains a lot of noise when moving. This noise
+                                        would be
+                                        amplified even
+                                        further when running the RC car in its vicinity. I collected 106 samples of
+                                        21.2 mhz
+                                        data by sending information over bluetooth. I analyze this noise through a
+                                        fourier transform. I include fft data for both pitch and roll, I
+                                        additionally
+                                        include the code I used to generate the FFT graphs based on the provided
+                                        tutorial.
+                                        Looking at the data, there dosent seem to
+                                        be much of a frequency spike which is a
+                                        result of a low pass filter on the chip by default (according to the
+                                        datasheet)
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/pitchfft.png"
+                                            alt="ft_graph" />
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/rollfft.png"
+                                            alt="ft_graph" />
+                                        <script
+                                            src="https://gist.github.com/AbioticFactor/f9c12dfcd10b6af09a02c067274ebc67.js"></script>
 
-                                        <button class="btn btn-primary" href="#" data-dismiss="modal"><i
-                                                class="fas fa-times fa-fw"></i>Close Window </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog"
-                aria-labelledby="#portfolioModal5Label" aria-hidden="true">
-                <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true"><i class="fas fa-times"></i></span></button>
-                        <div class="modal-body text-center">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8">
-                                        <!-- Portfolio Modal - Title-->
-                                        <h2 class="portfolio-modal-title text-secondary mb-0">Submarine</h2>
-                                        <!-- Icon Divider-->
-                                        <div class="divider-custom">
-                                            <div class="divider-custom-line"></div>
-                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                            <div class="divider-custom-line"></div>
-                                        </div>
-                                        <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5"
-                                            src="assets/img/portfolio/submarine.png" alt="Submarine" />
-                                        <!-- Portfolio Modal - Text-->
-                                        <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                            elit.Mollitia neque
-                                            assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore
-                                            quisquam
-                                            velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque.
-                                            Nam.
+                                    </p>
+                                    <br>
+
+                                    <h6>Gyroscope Test</h6>
+                                    <p class="mb-5"> Using the equations for pitch, roll, and yaw from lecture:
+
+                                        <script
+                                            src="https://gist.github.com/AbioticFactor/b2abebb2dfa5a89af89c20d9d0d01581.js"></script>
+
+                                        I recorded a test below showing the output of the gyroscope (value 2 =
+                                        pitch,
+                                        value 3 = roll, value 4 = yaw). I found that increasing the sampling
+                                        frequency led
+                                        to more
+                                        accurate results. I increased the final sampling frequency by a factor of 10
+                                        then a
+                                        factor of 100 to test this. I have found the values to be less noisy than
+                                        the equivalent measurements from the accelerometer but after increasing the
+                                        sampling
+                                        frequency and adding movement, the
+                                        gyroscope quickly suffers from drift. Drift causes the error to quickly
+                                        accumulate
+                                        to the point where the value drifts away from the expected value
+                                        significantly. This
+                                        isnt seen in
+                                        accelermoter data.
+                                        <br>
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/cClEZ3p5m14"
+                                            frameborder="0" allowfullscreen></iframe>
+
+
+                                    </p>
+                                    <p class="mb-5">
+
+                                        We can remedy our above problem by implementing a complementary filter
+                                        described
+                                        below:
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/comp_fil.png"
+                                            alt="comp_fil" />
+                                        This combines data from the accelerometer and the gyroscope to produce both
+                                        accurate
+                                        and stable data. The implementation for the filter is shown below:
+                                        <script
+                                            src="https://gist.github.com/AbioticFactor/339b8c631c3aeb6bd263b7c493df05db.js"></script>
+
+                                        As can be seen below, the complimentary filter is a smashing success. My
+                                        sensor
+                                        values are now usable with no drift or real noise to worry about.
+
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/oXNCeRjO0j0"
+                                            frameborder="0" allowfullscreen></iframe>
+
+                                    </p>
+                                    <br>
+
+                                    <h6>Sampling Data</h6>
+                                    <p class="mb-5"> After speeding up the code by removing all serial print
+                                        statements and
+                                        skipping any iterations where data wasnt ready, I was able to get to sample
+                                        my IMU
+                                        at a
+                                        frequency of 29 ms.
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/speed.png"
+                                            alt="speed" />
+                                        After this I created a notification handler to collect timestamped IMU data
+                                        and
+                                        store it in an array.
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/imuts.png"
+                                            alt="imuts" />
+                                    </p>
+                                    <p class="mb-5"> Finally, I capture both my IMU and ToF sensor data with the
+                                        same
+                                        command. I chose to seperate the data into their own arrays as the ToF data
+                                        would
+                                        severly bottleneck my IMU data. Using a simmilar structure to my above code
+                                        I am
+                                        able to capture both IMU and ToF data.
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/both.png" alt="both" />
+                                        <script
+                                            src="https://gist.github.com/AbioticFactor/52e85e16446a40a28ed57dc751246f99.js"></script>
+
+                                        With my current rate of 64 hz of sampling for IMU data (14 bytes each) and 7
+                                        hz
+                                        sampling of ToF
+                                        data (6 bytes each). With the arduino having 393216 bytes on board this
+                                        means I can
+                                        store data for 960 seconds before my memory is full.
+
+                                    </p>
+                                    <br>
+
+                                    <h6>Battery Connection</h6>
+                                    <p class="mb-5"> To prevent noise disturbance, we utilize different batteries
+                                        for the
+                                        motors and the electronics connected to the Artemis. We use the smaller
+                                        650mAh
+                                        battery for our electronics and the bigger 850mAh one for our motors so we
+                                        wont have
+                                        to charge the battery as often. I soldered JST connectors to the 650mAh
+                                        battery so I
+                                        can connect it to the Artemis as shown below:
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab4/battery.png"
+                                            alt="gyr_output" />
+                                    </p>
+                                    <br>
+
+                                    <h6>Stunt Recording</h6>
+                                    <p> class="mb-5"> Playing with the car made me realize just how jittery it is.
+                                        The robot
+                                        moves very fast and sometimes the commands lag. Attempting to turn is very
+                                        hard as
+                                        the robot seems to overturn most of the time. I crashed the robot several
+                                        times.
+                                    <div class="embed-container">
+                                        <iframe width="560" height="315" src="https://youtube.com/embed/KURGLvcNtoc"
+                                            frameborder="0" allowfullscreen></iframe>
                                         </p>
-                                        <button class="btn btn-primary" href="#" data-dismiss="modal"><i
-                                                class="fas fa-times fa-fw"></i>Close Window</button>
+                                        <p class="mb-5"> I recorded again this time with the Artemis. This is a
+                                            picture of
+                                            the robot all connected:
+                                            <img class="img-fluid rounded mb-5" src="assets/img/lab4/autobot.png"
+                                                alt="stunt_graph" />
+                                            And here is a video and a graph of data taken from the robot.
+                                        <div class="embed-container">
+                                            <iframe width="560" height="315" src="https://youtube.com/embed/r8jEX--ZFTY"
+                                                frameborder="0" allowfullscreen></iframe>
+                                            <img class="img-fluid rounded mb-5" src="assets/img/lab4/drive_data.png"
+                                                alt="stunt_graph" />
+
+                                            </p>
+                                            <br>
+
+                                            <button class="btn btn-primary" href="#" data-dismiss="modal"><i
+                                                    class="fas fa-times fa-fw"></i>Close Window </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <section class="page-section bg-primary text-white mb-0" id="about">
-                <div class="container">
-                    <!-- About Section Heading-->
-                    <div class="text-center">
-                        <h2 class="page-section-heading d-inline-block text-white">About Me</h2>
-                    </div>
-                    <!-- Icon Divider-->
-                    <div class="divider-custom divider-light">
-                        <div class="divider-custom-line"></div>
-                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                        <div class="divider-custom-line"></div>
-                    </div>
-                    <!-- About Section Content-->
-                    <div class="row">
-                        <div class="col-lg-4 ml-auto">
-                            <p class="pre-wrap lead">Hello, I am Tobi! I am CS junior at Cornell with a strong interests
-                                in
-                                Robotics and Machine Learning.
 
-                                This webpage includes my work from the class &quot;ECE 4160: Fast Robots&quot;</p>
+                <section class="page-section bg-primary text-white mb-0" id="about">
+                    <div class="container">
+                        <!-- About Section Heading-->
+                        <div class="text-center">
+                            <h2 class="page-section-heading d-inline-block text-white">About Me</h2>
                         </div>
-                        <div class="col-lg-4 mr-auto">
-                            <p class="pre-wrap lead"> </p>
+                        <!-- Icon Divider-->
+                        <div class="divider-custom divider-light">
+                            <div class="divider-custom-line"></div>
+                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                            <div class="divider-custom-line"></div>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section class="page-section" id="contact">
-                <div class="container">
-                    <!-- Contact Section Heading-->
-                    <div class="text-center">
-                        <h2 class="page-section-heading text-secondary d-inline-block mb-0">CONTACT</h2>
-                    </div>
-                    <!-- Icon Divider-->
-                    <div class="divider-custom">
-                        <div class="divider-custom-line"></div>
-                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                        <div class="divider-custom-line"></div>
-                    </div>
-                    <!-- Contact Section Content-->
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4">
-                            <div class="d-flex flex-column align-items-center">
-                                <div class="icon-contact mb-3"><i class="far fa-envelope"></i></div>
-                                <div class="text-muted">Email</div><a class="lead font-weight-bold"
-                                    href="mailto:aoa34@cornell.edu">aoa34@cornell.edu</a>
+                        <!-- About Section Content-->
+                        <div class="row">
+                            <div class="col-lg-4 ml-auto">
+                                <p class="pre-wrap lead">Hello, I am Tobi! I am CS junior at Cornell with a strong
+                                    interests
+                                    in
+                                    Robotics and Machine Learning.
+
+                                    This webpage includes my work from the class &quot;ECE 4160: Fast Robots&quot;
+                                </p>
+                            </div>
+                            <div class="col-lg-4 mr-auto">
+                                <p class="pre-wrap lead"> </p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <footer class="footer text-center">
-                <div class="container">
-                    <div class="row">
-                        <!-- Footer Location-->
-                        <div class="col-lg-4 mb-5 mb-lg-0">
-                            <h4 class="mb-4">LOCATION</h4>
-                            <p class="pre-wrap lead mb-0">Cornell University </p>
+                </section>
+                <section class="page-section" id="contact">
+                    <div class="container">
+                        <!-- Contact Section Heading-->
+                        <div class="text-center">
+                            <h2 class="page-section-heading text-secondary d-inline-block mb-0">CONTACT</h2>
                         </div>
-                        <!-- Footer Social Icons-->
-                        <div class="col-lg-4 mb-5 mb-lg-0">
-                            <h4 class="mb-4">AROUND THE WEB</h4><a class="btn btn-outline-light btn-social mx-1"
-                                href="https://www.linkedin.com/in/tobi-alade"><i
-                                    class="fab fa-fw fa-linkedin-in"></i></a>
+                        <!-- Icon Divider-->
+                        <div class="divider-custom">
+                            <div class="divider-custom-line"></div>
+                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                            <div class="divider-custom-line"></div>
                         </div>
-                        <!-- Footer About Text-->
-                        <div class="col-lg-4">
-                            <h4 class="mb-4"></h4>
-                            <p class="pre-wrap lead mb-0"> </p>
+                        <!-- Contact Section Content-->
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="icon-contact mb-3"><i class="far fa-envelope"></i></div>
+                                    <div class="text-muted">Email</div><a class="lead font-weight-bold"
+                                        href="mailto:aoa34@cornell.edu">aoa34@cornell.edu</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
-            <!-- Copyright Section-->
-            <section class="copyright py-4 text-center text-white">
-                <div class="container"><small class="pre-wrap">Copyright © Tobi Alade 2023 </small></div>
-            </section>
-            <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-            <div class="scroll-to-top d-lg-none position-fixed"><a
-                    class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
-                        class="fa fa-chevron-up"></i></a></div>
-            <!-- Bootstrap core JS-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-            <!-- Third party plugin JS-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-            <!-- Contact form JS-->
-            <script src="assets/mail/jqBootstrapValidation.js"></script>
-            <script src="assets/mail/contact_me.js"></script>
-            <!-- Core theme JS-->
-            <script src="js/scripts.js"></script>
+                </section>
+                <footer class="footer text-center">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Footer Location-->
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                                <h4 class="mb-4">LOCATION</h4>
+                                <p class="pre-wrap lead mb-0">Cornell University </p>
+                            </div>
+                            <!-- Footer Social Icons-->
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                                <h4 class="mb-4">AROUND THE WEB</h4><a class="btn btn-outline-light btn-social mx-1"
+                                    href="https://www.linkedin.com/in/tobi-alade"><i
+                                        class="fab fa-fw fa-linkedin-in"></i></a>
+                            </div>
+                            <!-- Footer About Text-->
+                            <div class="col-lg-4">
+                                <h4 class="mb-4"></h4>
+                                <p class="pre-wrap lead mb-0"> </p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Copyright Section-->
+                <section class="copyright py-4 text-center text-white">
+                    <div class="container"><small class="pre-wrap">Copyright © Tobi Alade 2023 </small></div>
+                </section>
+                <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+                <div class="scroll-to-top d-lg-none position-fixed"><a
+                        class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
+                            class="fa fa-chevron-up"></i></a></div>
+                <!-- Bootstrap core JS-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+                <!-- Third party plugin JS-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+                <!-- Contact form JS-->
+                <script src="assets/mail/jqBootstrapValidation.js"></script>
+                <script src="assets/mail/contact_me.js"></script>
+                <!-- Core theme JS-->
+                <script src="js/scripts.js"></script>
 </body>
 
 </html>
