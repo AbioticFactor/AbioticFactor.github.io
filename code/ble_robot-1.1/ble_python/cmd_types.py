@@ -14,3 +14,4 @@ class CMD(Enum):
     GET_ACC_5s = 10
     GET_IMU_5s_rapid = 11
     GET_IMU_ToF_5s = 12
+    SET_PID = 13

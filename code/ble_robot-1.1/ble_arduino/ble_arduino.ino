@@ -9,7 +9,7 @@
 #include <math.h>
 
 // Distance sensor stuff
-#define XSHUT 8
+#define XSHUT 6
 
 SFEVL53L1X distanceSensor;
 SFEVL53L1X distanceSensor2;
@@ -61,7 +61,8 @@ enum CommandTypes {
   GET_TOF_5s,
   GET_ACC_5s,
   GET_IMU_5s_rapid,
-  GET_IMU_ToF_5s
+  GET_IMU_ToF_5s,
+  SET_PID_VALS
 
 };
 
@@ -443,6 +444,36 @@ void handle_command() {
 
 
       break;
+
+  case SET_PID:
+      char data[MAX_MSG_SIZE];
+      success = robot_cmd.get_next_value(data);
+      if (!success){return;}
+
+      string term = tx_estring_value.c_str[0:1]
+      string value = tx_estring_value.c_str[2:]
+
+      if (term == 'P'){
+        Kp = value;
+        Serial.print("Kp set:");
+        Serial.println(Kp);
+        }
+      else if (term == 'I'){
+        Ki = value;
+        Serial.print("Ki set:");
+        Serial.println(Ki);
+        }
+      else if (term == 'D'){
+        Kd = value;
+        Serial.print("Kd set:");
+        Serial.println(Kd);
+        }
+
+      else{ 
+        Serial.println("Need to set either P, I or D");
+        }
+
+      break;
     /* 
          * The default case may not capture all types of invalid commands.
          * It is safer to validate the command string on the central device (in python)
@@ -561,6 +592,24 @@ void read_data() {
   if (rx_characteristic_string.written()) {
     handle_command();
   }
+}
+
+int bound_speed(float speed){
+  if(speed >= 255){
+    return 150;
+  }
+  else if (speed <= 70){
+    return 70
+  }
+  else{
+    return int(speed)
+  }
+}
+void pid(){
+  error = distance - setpoint;
+  
+
+  
 }
 
 void loop() {
