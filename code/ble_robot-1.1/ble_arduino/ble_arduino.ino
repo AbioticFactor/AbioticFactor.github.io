@@ -63,7 +63,7 @@ float ki = 0;
 float kd = 0;
 int sample_counter = 0;
 int data_counter = 0;
-int setpoint = 300;
+int setpoint = 340;
 int prev_err = 0;
 
 //////////// Global Variables ////////////
@@ -647,19 +647,22 @@ void read_data() {
 }
 
 int bound_speed(float speed){
-  if(speed >= 255){
-    return 255;
+  if(speed >= 60){
+    return 60;
   }
-  else if (speed >= 10 && speed <= 50){
-    return 50;
+  else if (speed >= 5 && speed <= 45){
+    return 45;
+  }
+  else if (speed < 5){
+    return 0;
   }
   else{
-    return 0;
+    return speed;
   }
 }
 void motor_control(char control, float speed){
   // Move forward
-  if(control == 'F'){
+  if(control == 'B'){
     analogWrite(7,  speed);
     analogWrite(12, 0);
     analogWrite(11, speed*1.25);
@@ -667,7 +670,7 @@ void motor_control(char control, float speed){
 
   }
   // Move backward
-  else if(control == 'B'){
+  else if(control == 'F'){
     analogWrite(7,  0);
     analogWrite(12, speed);
     analogWrite(11, 0);
@@ -702,7 +705,8 @@ void motor_control(char control, float speed){
 void pid(){
   int err = distance1 - setpoint;
   int delta_err = err - prev_err;
-  int speed = kp*err + delta_err*kd;
+  // int speed = kp*err + delta_err*kd;
+  int speed = kp*err;
 
   if(speed > 0) {
     motor_control('F', bound_speed(speed));
@@ -737,7 +741,6 @@ void pid(){
     sample_counter = 0;
   }
   else sample_counter += 1;
-
 }
 
 void loop() {
