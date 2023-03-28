@@ -8,7 +8,7 @@
 #include "ICM_20948.h"  // Click here to get the library: http://librarymanager/All#SparkFun_ICM_20948_IMU
 #include <math.h>
 
-// Distance sensor stuff
+// Distance TOF stuff
 #define XSHUT 6
 
 SFEVL53L1X distanceSensor;
@@ -17,6 +17,13 @@ SFEVL53L1X distanceSensor2;
 // IMU stuff
 ICM_20948_I2C myICM;
 #define AD0_VAL 1
+
+// Motor stuff
+#define motor1_a 7
+#define motor1_b 12
+
+#define motor2_a 11
+#define motor2_b 13
 
 
 //////////// BLE UUIDs ////////////
@@ -46,6 +53,19 @@ float tx_float_value = 0.0;
 long interval = 500;
 static long previousMillis = 0;
 unsigned long currentMillis = 0;
+
+float distance1 = 0;
+
+// Variables for PID
+char pid_data[150][30];
+float kp = 0;
+float ki = 0;
+float kd = 0;
+int sample_counter = 0;
+int data_counter = 0;
+int setpoint = 300;
+int prev_err = 0;
+
 //////////// Global Variables ////////////
 
 enum CommandTypes {
@@ -62,7 +82,7 @@ enum CommandTypes {
   GET_ACC_5s,
   GET_IMU_5s_rapid,
   GET_IMU_ToF_5s,
-  SET_PID_VALS
+  SET_PID
 
 };
 
@@ -101,6 +121,9 @@ void handle_command() {
   unsigned long last_time = millis();
   double pitch_a_LPF[] = { 0, 0 };
   const int n = 1;
+
+
+
 
   switch (cmd_type) {
     /*
@@ -445,35 +468,57 @@ void handle_command() {
 
       break;
 
-  case SET_PID:
-      char data[MAX_MSG_SIZE];
-      success = robot_cmd.get_next_value(data);
-      if (!success){return;}
+    case SET_PID:
+        tx_estring_value.clear();
+        
 
-      string term = tx_estring_value.c_str[0:1]
-      string value = tx_estring_value.c_str[2:]
+        float setkp;
+        float setkd;
 
-      if (term == 'P'){
-        Kp = value;
+        success = robot_cmd.get_next_value(setkp);
+        if (!success){return;}
+        kp = setkp;
         Serial.print("Kp set:");
-        Serial.println(Kp);
-        }
-      else if (term == 'I'){
-        Ki = value;
-        Serial.print("Ki set:");
-        Serial.println(Ki);
-        }
-      else if (term == 'D'){
-        Kd = value;
-        Serial.print("Kd set:");
-        Serial.println(Kd);
-        }
+        Serial.println(kp);
 
-      else{ 
-        Serial.println("Need to set either P, I or D");
-        }
+        // success = robot_cmd.get_next_value(setkd);
+        // if (!success){return;}
+        // kd = setkd;
+        // Serial.print("Kd set:");
+        // Serial.println(kd);
 
-      break;
+        starttime = millis();
+        
+        while(millis() < starttime + 7000) {
+          if (distanceSensor.checkForDataReady()) {
+            distance1 = distanceSensor.getDistance();
+            Serial.println(distance1);
+          }
+          pid();
+        }
+        motor_control('S', 0);
+      
+        // Send Data
+        for(int i = 0; i < data_counter; i++) {
+          tx_estring_value.clear();          
+          tx_estring_value.append(pid_data[i]);
+          tx_characteristic_string.writeValue(tx_estring_value.c_str());
+
+          Serial.print("Sent back: ");
+          Serial.println(tx_estring_value.c_str());
+          tx_estring_value.clear();
+        }
+        data_counter = 0;
+
+        //clear data
+        Serial.println("Clearing data");
+      for(int i = 0; i < 150; i++){
+        for(int j = 0; j < 30; j++){
+          pid_data[i][j] = '\0';
+      }
+    }
+
+        break;
     /* 
          * The default case may not capture all types of invalid commands.
          * It is safer to validate the command string on the central device (in python)
@@ -558,6 +603,8 @@ void setup() {
   distanceSensor.startRanging();  //Write configuration bytes to initiate measurement
   distanceSensor2.startRanging();
 
+
+
   bool initialized = false;
   while (!initialized) {
     myICM.begin(Wire, AD0_VAL);
@@ -570,6 +617,11 @@ void setup() {
       initialized = true;
     }
   }
+
+  pinMode(7, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(13, OUTPUT);
 }
 
 void write_data() {
@@ -596,20 +648,96 @@ void read_data() {
 
 int bound_speed(float speed){
   if(speed >= 255){
-    return 150;
+    return 255;
   }
-  else if (speed <= 70){
-    return 70
+  else if (speed >= 10 && speed <= 50){
+    return 50;
   }
   else{
-    return int(speed)
+    return 0;
   }
 }
-void pid(){
-  error = distance - setpoint;
-  
+void motor_control(char control, float speed){
+  // Move forward
+  if(control == 'F'){
+    analogWrite(7,  speed);
+    analogWrite(12, 0);
+    analogWrite(11, speed*1.25);
+    analogWrite(13, 0);
 
-  
+  }
+  // Move backward
+  else if(control == 'B'){
+    analogWrite(7,  0);
+    analogWrite(12, speed);
+    analogWrite(11, 0);
+    analogWrite(13, speed*1.25);
+  }
+
+  // Turn right
+  else if(control == 'R'){
+    analogWrite(7,  0);
+    analogWrite(12, speed);
+    analogWrite(11, speed*1.25);
+    analogWrite(13, 0);
+  }
+
+  // Turn left
+  else if(control == 'L'){
+    analogWrite(7,  speed);
+    analogWrite(12, 0);
+    analogWrite(11, 0);
+    analogWrite(13, speed*1.25);
+  }
+
+  // Stop
+  else if(control == 'S'){
+    analogWrite(7,  0);
+    analogWrite(12, 0);
+    analogWrite(11, 0);
+    analogWrite(13, 0);
+  }
+}
+
+void pid(){
+  int err = distance1 - setpoint;
+  int delta_err = err - prev_err;
+  int speed = kp*err + delta_err*kd;
+
+  if(speed > 0) {
+    motor_control('F', bound_speed(speed));
+  }
+  else if(speed < 0) {
+    motor_control('B', bound_speed(-1*speed));
+  }
+  else{
+    motor_control('S', 0);
+  }
+
+  prev_err = err;
+
+  if(sample_counter == 50) {
+    char time_buff[20];
+    char speed_buff[20];
+    char distance_buff[20];
+
+    int time = millis();
+
+    itoa(time, time_buff, 10);
+    itoa(speed, speed_buff, 10);
+    itoa(distance1, distance_buff, 10);
+
+    strcat(pid_data[data_counter], "|T:");
+    strcat(pid_data[data_counter], time_buff);
+    strcat(pid_data[data_counter], "|S:");
+    strcat(pid_data[data_counter], speed_buff);
+    strcat(pid_data[data_counter], "|D:");
+    strcat(pid_data[data_counter], distance_buff);  
+    data_counter++;
+    sample_counter = 0;
+  }
+  else sample_counter += 1;
+
 }
 
 void loop() {
