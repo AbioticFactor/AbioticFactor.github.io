@@ -1,4 +1,3 @@
-
 #include "BLECStringCharacteristic.h"
 #include "EString.h"
 #include "RobotCommand.h"
@@ -66,9 +65,6 @@ int data_counter = 0;
 int setpoint = 340;
 int prev_err = 0;
 
-// Variables for KF
-int speed = 0;
-
 //////////// Global Variables ////////////
 
 enum CommandTypes {
@@ -126,13 +122,13 @@ void handle_command() {
   double pitch_a_LPF[] = { 0, 0 };
   const int n = 1;
 
+  // variables for KF
+  int speed = 0;
+
 
 
 
   switch (cmd_type) {
-    /*
-         * Write "PONG" on the GATT characteristic BLE_UUID_TX_STRING
-         */
     case PING:
       tx_estring_value.clear();
       tx_estring_value.append("PONG");
@@ -142,9 +138,7 @@ void handle_command() {
       Serial.println(tx_estring_value.c_str());
 
       break;
-    /*
-         * Extract two integers from the command string
-         */
+
     case SEND_TWO_INTS:
       int int_a, int_b;
 
@@ -164,18 +158,14 @@ void handle_command() {
       Serial.println(int_b);
 
       break;
-    /*
-         * Extract three floats from the command string
-         */
+
     case SEND_THREE_FLOATS:
       /*
              * Your code goes here.
              */
 
       break;
-    /*
-         * Add a prefix and postfix to the string value extracted from the command string
-         */
+
     case ECHO:
 
       char char_arr[MAX_MSG_SIZE];
@@ -189,17 +179,11 @@ void handle_command() {
       Serial.print(char_arr);
 
       break;
-    /*
-         * DANCE
-         */
     case DANCE:
       Serial.println("Look Ma, I'm Dancin'!");
 
       break;
 
-    /*
-         * SET_VEL
-         */
     case SET_VEL:
 
       break;
@@ -475,7 +459,6 @@ void handle_command() {
     case SET_PID:
         tx_estring_value.clear();
         
-
         float setkp;
         float setkd;
 
@@ -484,12 +467,6 @@ void handle_command() {
         kp = setkp;
         Serial.print("Kp set:");
         Serial.println(kp);
-
-        // success = robot_cmd.get_next_value(setkd);
-        // if (!success){return;}
-        // kd = setkd;
-        // Serial.print("Kd set:");
-        // Serial.println(kd);
 
         starttime = millis();
         
@@ -519,21 +496,20 @@ void handle_command() {
       for(int i = 0; i < 150; i++){
         for(int j = 0; j < 30; j++){
           pid_data[i][j] = '\0';
+        }
       }
-    }
-
         break;
 
     case DRIVE_AT_WALL:
         tx_estring_value.clear();
 
-        
-        speed = 100;
-        motor_control('F', speed);
         starttime = millis();
-        while(millis() < starttime + 4000) {
-          if (distanceSensor.checkForDataReady()) {
-            distance1 = distanceSensor.getDistance(); 
+        speed = 90;
+        motor_control('F', speed);
+        while(millis() < starttime + 3000) {
+
+          if (distanceSensor2.checkForDataReady()) {
+            distance1 = distanceSensor2.getDistance(); 
           if(sample_counter == 35) {
             char time_buff[20];
             char speed_buff[20];
@@ -667,18 +643,18 @@ void setup() {
 
 
 
-  bool initialized = false;
-  while (!initialized) {
-    myICM.begin(Wire, AD0_VAL);
-    Serial.print(F("Initialization of the sensor returned: "));
-    Serial.println(myICM.statusString());
-    if (myICM.status != ICM_20948_Stat_Ok) {
-      Serial.println("Trying again...");
-      delay(500);
-    } else {
-      initialized = true;
-    }
-  }
+  // bool initialized = false;
+  // while (!initialized) {
+  //   myICM.begin(Wire, AD0_VAL);
+  //   Serial.print(F("Initialization of the sensor returned: "));
+  //   Serial.println(myICM.statusString());
+  //   if (myICM.status != ICM_20948_Stat_Ok) {
+  //     Serial.println("Trying again...");
+  //     delay(500);
+  //   } else {
+  //     initialized = true;
+  //   }
+  // }
 
   pinMode(7, OUTPUT);
   pinMode(12, OUTPUT);
@@ -768,7 +744,7 @@ void pid(){
   int err = distance1 - setpoint;
   int delta_err = err - prev_err;
   // int speed = kp*err + delta_err*kd;
-  speed = kp*err;
+  int speed = kp*err;
 
   if(speed > 0) {
     motor_control('F', bound_speed(speed));
