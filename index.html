@@ -46,7 +46,7 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
-            <img class="masthead-avatar mb-5" src="assets/img/robot.svg" alt="..." />
+            <img class="masthead-avatar mb-5" src="assets\img\1653598447834.jpg" alt="Tobi" />
             <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">ECE 4160: Fast Robots</h1>
             <!-- Icon Divider-->
@@ -81,8 +81,6 @@
                                 style='font-size:36px'>
                                 Lab 1: Artemis
                             </div>
-                            <!-- <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div> -->
                         </div>
                         <img class="img-fluid" src="assets/img/portfolio/lab1.png" alt="Lab1" />
                     </div>
@@ -224,13 +222,13 @@
             </div>
             <!-- About Section Content-->
             <div class="row">
-                <div class="col-lg-4 ms-auto">
+                <!-- <div class="col-lg-4 ms-auto">
                     <img class="img-fluid" src="assets/img/portfolio/me.png" alt="..." />
-                </div>
+                </div> -->
                 <div class="col-lg-6 me-auto">
                     <p class="lead">Hello, I am Tobi! I am CS junior at Cornell with a strong
                         interest in Robotics and Machine Learning.</p>
-                    <p class="lead">This course focuses on systems level design and implementation of fast and dynamic
+                    <p class="lead">This course (ECE 4160: Fast Robots) focuses on systems level design and implementation of fast and dynamic
                         autonomous robots. I will design and build a fast autonomous car, explore dynamic behaviors,
                         acting
                         forces, sensors, and reactive control on an embedded processor.
@@ -1332,6 +1330,8 @@
                                 <p class="mb-5"> In order to implement the klarman filter, I first needed to estimate the drag and momentum values. These are used in the A and B matrices that will go into my kalman filter. I used a step response of 90 (as this was the maximum PWM value I obtained with my PID controller).
                                 <br>
                                 This yielded a maximum velocity of 1983 mm/s in the usable data constrained between ~0.5 and ~1.8 seconds. Before 0.5 seconds the sensor was too far away and after 1.8 seconds the robot crashes into the pillow. Using 0.9 * 1983 = 1784.7, I found my rise time to be ~1.6 seconds.
+                                <br>
+                                Using these 
                                     <br>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab7/velocity.png"
                                         alt="posetup" />
