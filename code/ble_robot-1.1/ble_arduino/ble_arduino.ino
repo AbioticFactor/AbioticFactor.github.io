@@ -528,13 +528,13 @@ void handle_command() {
         tx_estring_value.clear();
 
         
-        speed = 100;
+        speed = 255;
         motor_control('F', speed);
         starttime = millis();
-        while(millis() < starttime + 4000) {
+        while(millis() < starttime + 5000) {
           if (distanceSensor.checkForDataReady()) {
             distance1 = distanceSensor.getDistance(); 
-          if(sample_counter == 35) {
+          if(sample_counter == 30) {
             char time_buff[20];
             char speed_buff[20];
             char distance_buff[20];
@@ -667,18 +667,18 @@ void setup() {
 
 
 
-  bool initialized = false;
-  while (!initialized) {
-    myICM.begin(Wire, AD0_VAL);
-    Serial.print(F("Initialization of the sensor returned: "));
-    Serial.println(myICM.statusString());
-    if (myICM.status != ICM_20948_Stat_Ok) {
-      Serial.println("Trying again...");
-      delay(500);
-    } else {
-      initialized = true;
-    }
-  }
+  // bool initialized = false;
+  // while (!initialized) {
+  //   myICM.begin(Wire, AD0_VAL);
+  //   Serial.print(F("Initialization of the sensor returned: "));
+  //   Serial.println(myICM.statusString());
+  //   if (myICM.status != ICM_20948_Stat_Ok) {
+  //     Serial.println("Trying again...");
+  //     delay(500);
+  //   } else {
+  //     initialized = true;
+  //   }
+  // }
 
   pinMode(7, OUTPUT);
   pinMode(12, OUTPUT);
