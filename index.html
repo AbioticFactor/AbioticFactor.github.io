@@ -46,7 +46,7 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
-            <img class="masthead-avatar mb-5" src="assets/img/robot.svg" alt="..." />
+            <img class="masthead-avatar mb-5" src="assets\img\1653598447834.jpg" alt="Tobi" />
             <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">ECE 4160: Fast Robots</h1>
             <!-- Icon Divider-->
@@ -81,8 +81,6 @@
                                 style='font-size:36px'>
                                 Lab 1: Artemis
                             </div>
-                            <!-- <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div> -->
                         </div>
                         <img class="img-fluid" src="assets/img/portfolio/lab1.png" alt="Lab1" />
                     </div>
@@ -140,7 +138,7 @@
                             <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
                                 Lab 6: PID Control</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/PID.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/PID.png" alt="PID" />
                     </div>
                 </div>
                 <!-- Portfolio Item 7-->
@@ -148,10 +146,10 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal7">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 7: Kalman Filter</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/kalman.png" alt="kalman" />
                     </div>
                 </div>
                 <!-- Portfolio Item 8-->
@@ -224,13 +222,13 @@
             </div>
             <!-- About Section Content-->
             <div class="row">
-                <div class="col-lg-4 ms-auto">
+                <!-- <div class="col-lg-4 ms-auto">
                     <img class="img-fluid" src="assets/img/portfolio/me.png" alt="..." />
-                </div>
+                </div> -->
                 <div class="col-lg-6 me-auto">
                     <p class="lead">Hello, I am Tobi! I am CS junior at Cornell with a strong
                         interest in Robotics and Machine Learning.</p>
-                    <p class="lead">This course focuses on systems level design and implementation of fast and dynamic
+                    <p class="lead">This course (ECE 4160: Fast Robots) focuses on systems level design and implementation of fast and dynamic
                         autonomous robots. I will design and build a fast autonomous car, explore dynamic behaviors,
                         acting
                         forces, sensors, and reactive control on an embedded processor.
@@ -1307,9 +1305,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 7:
+                                    Kalman Filter</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1317,68 +1314,36 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
-
-                                <h5>Hardware</h5>
-                                <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
-                                        alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
-
-                                </ul>
+                                <p class="mb-5">The goal of this lab is to implement a Kalman filter. This will allow us
+                                    to augment our PID controller to work much faster</p>
 
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
+                                    <li align="left">Estimate drag and momentum </li>
+                                    <li align="left">Initialize KF </li>
+                                    <li align="left">Kalman Filter in Jupyter </li>
+                                    <li align="left">Kalman Filter on the Robot </li>
                                 </ul>
 
-                                <h6>Oscilloscope Test</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
+                                <h6>Estimate drag and momentum</h6>
+                                <p class="mb-5"> In order to implement the klarman filter, I first needed to estimate the drag and momentum values. These are used in the A and B matrices that will go into my kalman filter. I used a step response of 90 (as this was the maximum PWM value I obtained with my PID controller).
+                                <br>
+                                This yielded a maximum velocity of 1983 mm/s in the usable data constrained between ~0.5 and ~1.8 seconds. Before 0.5 seconds the sensor was too far away and after 1.8 seconds the robot crashes into the pillow. Using 0.9 * 1983 = 1784.7, I found my rise time to be ~1.6 seconds.
+                                <br>
+                                Using these 
                                     <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab7/velocity.png"
                                         alt="posetup" />
                                     <br>
-                                    I utilized the below code to test the functionality of the boards:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
+                                    I utilized the following arduino code to test:
+                                    <script src="https://gist.github.com/AbioticFactor/436f83828aadc58729c4b83bc301d631.js"></script>
                                     <br>
 
-                                </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
                                 </p>
                                 <br>
 
-                                <h6>Spin Test</h6>
+                                <h6>Initialize KF</h6>
                                 <p class="mb-5"> After setting up the car on its side as described in the
                                     directions I
                                     was able to use the code below to produce the motors spinning as
@@ -1393,7 +1358,7 @@
                                 </p>
                                 <br>
 
-                                <h6>double spin test</h6>
+                                <h6>Kalman Filter in Jupyter</h6>
                                 <p class="mb-5"> After fully wiring the car as shown below:
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
                                         alt="fully_wired" />
@@ -1407,7 +1372,7 @@
                                 </p>
                                 <br>
 
-                                <h6>Calibration</h6>
+                                <h6>Kalman Filter on the Robot</h6>
                                 <p class="mb-5"> In order to get my motor to spin at the same rate I had to
                                     find a
                                     callibnration factor. After testing a multitude of values I found that a
@@ -1421,19 +1386,6 @@
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
-
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
-                                    <br>
-                                </p>
-                                <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </div>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
