@@ -1353,9 +1353,23 @@
                                 </p>
                                 <br>
 
-                                <h6>Initialize KF</h6>
+                                <h6>Partners data</h6>
                                 <p class="mb-5"> AT THIS POINT I STARTED WORKING WITH DEMIAN YUTIN'S ROBOT AS I
-                                    ENCOUNTERED HARDWARE ISSUES I COULDNT FIX IN OPEN LAB HOURS. After finding the A and
+                                    ENCOUNTERED HARDWARE ISSUES I COULDNT FIX IN OPEN LAB HOURS. This is the data we
+                                    gathered with the same process as above.
+                                    <br>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab7/step_distance.png"
+                                        alt="step_distance" />
+                                        <img class="img-fluid rounded mb-5" src="assets/img/lab7/step_speed.png"
+                                        alt="step_speed" />
+                                    <br>
+
+
+                                </p>
+                                <br>
+
+                                <h6>Initialize KF</h6>
+                                <p class="mb-5"> . After finding the A and
                                     B matrices using the equations from class I was able to create a kalman filter
                                     utilizing the following code:
 
@@ -1366,22 +1380,19 @@
                                 <br>
 
                                 <h6>Kalman Filter in Jupyter</h6>
-                                <p class="mb-5"> Using succesful data from a PID run and sigma values of 10, 10, and 20 for sigma 1, 2,
+                                <p class="mb-5"> Using succesful data from a PID run and sigma values of 10, 10, and 20
+                                    for sigma 1, 2,
                                     and 3 respectively, I obtained the following result for my kalman filter:
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab7/kf.png" alt="kf" />
+
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/868a3156b368379d390ff28ac8348066.js"></script>
                                 </p>
                                 <br>
 
                                 <h6>Kalman Filter on the Robot</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
+                                <p class="mb-5"> The next step was to perform extrapolation (Task 4.A) on the robot. In
+                                    order to do this we
                                     <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
