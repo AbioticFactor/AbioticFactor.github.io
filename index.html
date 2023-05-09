@@ -1795,7 +1795,7 @@
                                     and previous pose in addition to the control information to output the probability
                                     the robot is in a certain state. We first use the previous "compute control"
                                     function to determine the control action. We then use a gaussian distribution as our
-                                    probability function to estimate if we were succesful:
+                                    probability function while we estimate if that action was succesful:
                                     <br>
                                     <script
                                         src="https://gist.github.com/AbioticFactor/df165c1924aa0b627f582bce857c6637.js"></script>
@@ -1810,7 +1810,7 @@
                                 <br>
                                 <p class="mb-5"> Next is the predction step. We use this step to update our beliefs
                                     based on our previous beleifs and our odometry motion model. We iterate through
-                                    positions and disregard any negligible cells (< 0.0001 belief). For non negligible
+                                    positions (with the nested for loops) and disregard any negligible cells (cells with < 0.0001 belief). For non negligible
                                         cells we update our beleifs. Finally we must normalize as its a probability
                                         distribution. <br>
 
@@ -1829,7 +1829,7 @@
                                 <br>
                                 <p class="mb-5"> The next step is to compute the probability that our sensor readings
                                     were correct. For each pose we evaluate the probability of the sensor readings based
-                                    on the observations of our latest movements with a guassian:
+                                    on the observations of our latest movements with a guassian and append it to a list of all the probabilties in qustion:
                                     <br>
                                     <script
                                         src="https://gist.github.com/AbioticFactor/6109a439fb87b81c4a8ea9f5c839e6ce.js"></script>
@@ -1839,8 +1839,8 @@
                                 <br>
 
                                 <h6>Update step</h6>
-                                <p class="mb-5"> Finally we update the probability of our beliefs by using the values
-                                    computed in our sesor model for each pose. We update these beliefs and normalize
+                                <p class="mb-5"> Finally we go through each pose and update the probability of our beliefs by using the values
+                                    computed in our sesor model. We update these beliefs and normalize
                                     (since its a probability):
                                     <br>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab10/update_step.png"
