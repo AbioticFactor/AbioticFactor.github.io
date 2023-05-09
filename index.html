@@ -1728,7 +1728,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 10:
                                     Localization (simulator)</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
@@ -1758,90 +1758,109 @@
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Prediction Step </li>
-                                    <li align="left">Update Step </li>
-                                    <li align="left">Motion Model </li>
+                                    <li align="left">Compute control </li>
+                                    <li align="left">Odometry motion model </li>
+                                    <li align="left">Prediction step </li>
                                     <li align="left">Sensor Model </li>
-                                    <li align="left">Compute Control </li>
+                                    <li align="left">Update step </li>
                                     <li align="left">Demo </li>
                                 </ul>
 
-                                <h6>Prediction Step</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
+                                <h6>Compute control</h6>
+                                <p class="mb-5"> The first step is to compute the control based on the change in
+                                    odometry poses:
                                     <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
-                                        alt="posetup" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab10/compute_control.png"
+                                        alt="compute_control" />
                                     <br>
-                                    I utilized the below code to test the functionality of the boards:
+                                    Utilizing the below equtions from class we can produce the following code using
+                                    numpys built in math function "atan2" and "sqrt". Converting to degrees was
+                                    necessary to make the units consistent:
+                                    <br>
+                                    <img class="img-fluid rounded mb-5"
+                                        src="assets/img/lab10/compute_control_equations.png"
+                                        alt="compute_control_equations" />
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/0c1184e0c4058c2f33f847361189b059.js"></script>
                                     <br>
 
                                 </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
-                                </p>
                                 <br>
 
-                                <h6>Update Step</h6>
-                                <p class="mb-5"> After setting up the car on its side as described in the
-                                    directions I
-                                    was able to use the code below to produce the motors spinning as
-                                    intended in the
-                                    video below
-
+                                <h6>Odometry motion model</h6>
+                                <img class="img-fluid rounded mb-5" src="assets/img/lab10/omm.png"
+                                    alt="odom_motion_model" />
+                                <br>
+                                <p class="mb-5"> The next step is the Odometry Motion Model. Here we utilize the current
+                                    and previous pose in addition to the control information to output the probability
+                                    the robot is in a certain state. We first use the previous "compute control"
+                                    function to determine the control action. We then use a gaussian distribution as our
+                                    probability function to estimate if we were succesful:
+                                    <br>
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/df165c1924aa0b627f582bce857c6637.js"></script>
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
-                                        frameborder="0" allowfullscreen></iframe>
+
                                 </p>
                                 <br>
 
-                                <h6>Motion Model</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
+                                <h6>Prediction step</h6>
+                                <img class="img-fluid rounded mb-5" src="assets/img/lab10/prediction_step.png"
+                                    alt="prediction_step" />
+                                <br>
+                                <p class="mb-5"> Next is the predction step. We use this step to update our beliefs
+                                    based on our previous beleifs and our odometry motion model. We iterate through
+                                    positions and disregard any negligible cells (< 0.0001 belief). For non negligible
+                                        cells we update our beleifs. Finally we must normalize as its a probability
+                                        distribution. <br>
+
+                                        We can produce the following code to implement the desired behavior:
+                                        <br>
+                                        <script
+                                            src="https://gist.github.com/AbioticFactor/2ec486b2d98378139646acd6e65d1085.js"></script>
+                                        <br>
+
                                 </p>
                                 <br>
 
-                                <h6>Sensor Model</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <h6>sensor model</h6>
+                                <img class="img-fluid rounded mb-5" src="assets/img/lab10/sensor_model.png"
+                                    alt="sensor_model" />
+                                <br>
+                                <p class="mb-5"> The next step is to compute the probability that our sensor readings
+                                    were correct. For each pose we evaluate the probability of the sensor readings based
+                                    on the observations of our latest movements with a guassian:
+                                    <br>
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/6109a439fb87b81c4a8ea9f5c839e6ce.js"></script>
+                                    <br>
+
+                                </p>
+                                <br>
+
+                                <h6>Update step</h6>
+                                <p class="mb-5"> Finally we update the probability of our beliefs by using the values
+                                    computed in our sesor model for each pose. We update these beliefs and normalize
+                                    (since its a probability):
+                                    <br>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab10/update_step.png"
+                                        alt="update_step" />
+                                    <br>
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/9fe71a5e853537a9d986dd6acf78a470.js"></script>
+                                    <br>
+
                                 </p>
                                 <br>
 
                                 <h6>Demo</h6>
-                                <p class="mb-5"> Attached below is a video of the results. While it generaly localizes pretty well, :
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
-                                    <br>
+                                <p class="mb-5"> Attached below is a video of the results. While it generaly localizes
+                                    pretty well, it is commonly a bit off as the localization is off due to a lack of
+                                    data and a multitude of areas the robot could be in but
+                                    overtime it corrects itself:
                                 </p>
                                 <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/3REE0e219Ro"
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/lVtPtPeZBXY"
                                         frameborder="0" allowfullscreen></iframe>
                                 </div>
 
