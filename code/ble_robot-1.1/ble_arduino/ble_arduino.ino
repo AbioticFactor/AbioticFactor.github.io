@@ -6,6 +6,9 @@
 #include "SparkFun_VL53L1X.h"
 #include "ICM_20948.h"  // Click here to get the library: http://librarymanager/All#SparkFun_ICM_20948_IMU
 #include <math.h>
+// #include <BasicLinearAlgebra.h>
+
+// using namespace BLA;
 
 // Distance TOF stuff
 #define XSHUT 6
@@ -23,6 +26,79 @@ ICM_20948_I2C myICM;
 
 #define motor2_a 11
 #define motor2_b 13
+
+//////// KF Variables ////////
+
+float d_val = 0.0005;  // drag
+float m_val = 5.64e-4; // mass
+
+// // A, B, C matrices
+// Matrix<2,2> A_mat = { 0, 1,
+//                       0, -d_val/m_val };
+// Matrix<2,1> B_mat = { 0, 
+//                       1/m_val };
+// Matrix<1,2> C_mat = { -1, 0 };
+
+// // Process and measurement noise
+// Matrix<2,2> sig_u = { 10^2, 0,
+//                       0, 10^2 };
+// Matrix<1,1> sig_z = { 20^2 };
+
+// // Discretize A & B
+// float delta_t = 0.015;
+// Matrix<2,2> I_mat = { 1, 0,
+//                       0, 1      };
+// Matrix<2,2> A_d   = { 1, 0.015,
+//                       0, 0.9867 };
+// Matrix<2,1> B_d   = { 0,
+//                       26.5957   };
+
+// // Initial states
+// Matrix<2,2> sig   = { 5^2, 0,
+//                       0, 5^2 }; // initial state uncertainty
+// Matrix<2,1> x_val = { -2000, 
+//                       0      }; // initial state output
+
+//////// KF Function ////////
+
+// void kf() {
+
+//   Matrix<2,1> x_p = A_d*x_val + B_d*pwm_val;
+//   Matrix<2,2> sig_p = A_d*sig*(~A_d) + sig_u;
+
+//   Matrix<1,1> y_curr = { dist2 };
+//   Matrix<1,1> y_m = y_curr - C_mat*x_p;
+//   Matrix<1,1> sig_m = C_mat*sig_p*(~C_mat) + sig_z;
+
+//   Matrix<1,1> sig_m_inv = sig_m;
+//   Invert(sig_m_inv);
+
+//   Matrix<2,1> kf_gain = sig_p*(~C_mat)*(sig_m_inv);
+
+//   // Update
+//   x_val = x_p + kf_gain*y_m;
+//   sig = (I_mat - kf_gain*C_mat)*sig_p;
+// }
+
+//////// PID ////////
+
+// sensor_data();
+// store_data();
+// kf();
+
+// e = -1*x_val(0,0) - 300;
+// d_e = e - prev_e;
+// pwm_val = Kp*e + Kd*d_e;
+
+// if (pwm_val > 1) {
+//   motor_forward( limit_range(pwm_val) );
+// } else if (pwm_val < -1) {
+//   motor_backward( limit_range(pwm_val*-1) );
+// } else {
+//   motor_stop();
+// }
+
+// prev_e = e;
 
 
 //////////// BLE UUIDs ////////////
@@ -501,16 +577,25 @@ void handle_command() {
         break;
 
     case DRIVE_AT_WALL:
-        tx_estring_value.clear();
-
-        starttime = millis();
-        speed = 90;
+        tx_estring_value.clear();        
+        speed = 100;
         motor_control('F', speed);
+        starttime = millis();
         while(millis() < starttime + 3000) {
-
-          if (distanceSensor2.checkForDataReady()) {
-            distance1 = distanceSensor2.getDistance(); 
+          if (distanceSensor.checkForDataReady()) {
+            distance1 = distanceSensor.getDistance(); 
           if(sample_counter == 35) {
+
+        // Weird merge conflict starts here
+
+        // starttime = millis();
+        // speed = 90;
+        // motor_control('F', speed);
+        // while(millis() < starttime + 3000) {
+
+        //   if (distanceSensor2.checkForDataReady()) {
+        //     distance1 = distanceSensor2.getDistance(); 
+        //   if(sample_counter == 35) {
             char time_buff[20];
             char speed_buff[20];
             char distance_buff[20];
@@ -636,8 +721,8 @@ void setup() {
       ;
   }
   Serial.println("Sensors online!");
-  distanceSensor.setDistanceModeShort();
-  distanceSensor2.setDistanceModeShort();
+  distanceSensor.setDistanceModeLong();
+  distanceSensor2.setDistanceModeLong();
   distanceSensor.startRanging();  //Write configuration bytes to initiate measurement
   distanceSensor2.startRanging();
 
@@ -685,8 +770,8 @@ void read_data() {
 }
 
 int bound_speed(float speed){
-  if(speed >= 60){
-    return 60;
+  if(speed >= 200){
+    return 200;
   }
   else if (speed >= 5 && speed <= 45){
     return 45;
@@ -703,7 +788,7 @@ void motor_control(char control, float speed){
   if(control == 'B'){
     analogWrite(7,  speed);
     analogWrite(12, 0);
-    analogWrite(11, speed*1.25);
+    analogWrite(11, speed*1.1);
     analogWrite(13, 0);
 
   }
@@ -712,14 +797,14 @@ void motor_control(char control, float speed){
     analogWrite(7,  0);
     analogWrite(12, speed);
     analogWrite(11, 0);
-    analogWrite(13, speed*1.25);
+    analogWrite(13, speed*1.1);
   }
 
   // Turn right
   else if(control == 'R'){
     analogWrite(7,  0);
     analogWrite(12, speed);
-    analogWrite(11, speed*1.25);
+    analogWrite(11, speed*1);
     analogWrite(13, 0);
   }
 
@@ -728,7 +813,7 @@ void motor_control(char control, float speed){
     analogWrite(7,  speed);
     analogWrite(12, 0);
     analogWrite(11, 0);
-    analogWrite(13, speed*1.25);
+    analogWrite(13, speed*1);
   }
 
   // Stop

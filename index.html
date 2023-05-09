@@ -228,7 +228,8 @@
                 <div class="col-lg-6 me-auto">
                     <p class="lead">Hello, I am Tobi! I am CS junior at Cornell with a strong
                         interest in Robotics and Machine Learning.</p>
-                    <p class="lead">This course (ECE 4160: Fast Robots) focuses on systems level design and implementation of fast and dynamic
+                    <p class="lead">This course (ECE 4160: Fast Robots) focuses on systems level design and
+                        implementation of fast and dynamic
                         autonomous robots. I will design and build a fast autonomous car, explore dynamic behaviors,
                         acting
                         forces, sensors, and reactive control on an embedded processor.
@@ -1327,64 +1328,79 @@
                                 </ul>
 
                                 <h6>Estimate drag and momentum</h6>
-                                <p class="mb-5"> In order to implement the klarman filter, I first needed to estimate the drag and momentum values. These are used in the A and B matrices that will go into my kalman filter. I used a step response of 90 (as this was the maximum PWM value I obtained with my PID controller).
-                                <br>
-                                This yielded a maximum velocity of 1983 mm/s in the usable data constrained between ~0.5 and ~1.8 seconds. Before 0.5 seconds the sensor was too far away and after 1.8 seconds the robot crashes into the pillow. Using 0.9 * 1983 = 1784.7, I found my rise time to be ~1.6 seconds.
-                                <br>
-                                Using these 
+                                <p class="mb-5"> In order to implement the klarman filter, I first needed to estimate
+                                    the drag and momentum values. These are used in the A and B matrices that will go
+                                    into my kalman filter. I used a step response of 90 (as this was the maximum PWM
+                                    value I obtained with my PID controller).
+                                    <br>
+                                    This yielded a maximum velocity of 1983 mm/s in the usable data constrained between
+                                    ~0.5 and ~1.8 seconds. Before 0.5 seconds the sensor was too far away and after 1.8
+                                    seconds the robot crashes into the pillow. Using 0.9 * 1983 = 1784.7, I found my
+                                    rise time to be ~1.6 seconds.
+                                    <br>
+                                    Using these
                                     <br>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab7/velocity.png"
                                         alt="posetup" />
                                     <br>
                                     I utilized the following arduino code to test:
-                                    <script src="https://gist.github.com/AbioticFactor/436f83828aadc58729c4b83bc301d631.js"></script>
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/436f83828aadc58729c4b83bc301d631.js"></script>
                                     <br>
+
+
+
+                                </p>
+                                <br>
+
+                                <h6>Partners data</h6>
+                                <p class="mb-5"> AT THIS POINT I STARTED WORKING WITH DEMIAN YUTIN'S ROBOT AS I
+                                    ENCOUNTERED HARDWARE ISSUES I COULDNT FIX IN OPEN LAB HOURS. This is the data we
+                                    gathered with the same process as above.
+                                    <br>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab7/step_distance.png"
+                                        alt="step_distance" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab7/step_speed.png"
+                                        alt="step_speed" />
+                                    <br>
+
 
                                 </p>
                                 <br>
 
                                 <h6>Initialize KF</h6>
-                                <p class="mb-5"> After setting up the car on its side as described in the
-                                    directions I
-                                    was able to use the code below to produce the motors spinning as
-                                    intended in the
-                                    video below
-
+                                <p class="mb-5"> . After finding the A and
+                                    B matrices using the equations from class I was able to initilized my kalman filter
+                                    matrices using the above calculations and utilizing the following code:
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/b992a9ab579abfd6d19c5605e81434b8.js"></script>
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
-                                        frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
 
                                 <h6>Kalman Filter in Jupyter</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
+                                <p class="mb-5"> Using succesful data from a PID run and sigma values of 10, 10, and 20
+                                    for sigma 1, 2,
+                                    and 3 respectively, I obtained the following result for my kalman filter:
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab7/kf.png" alt="kf" />
+
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/868a3156b368379d390ff28ac8348066.js"></script>
                                 </p>
                                 <br>
 
                                 <h6>Kalman Filter on the Robot</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5"> I wasnt really low on time but my robot simply not working and taking
+                                    up most of the time led me to perform extrapolation (Task 4.A) on the robot. In
+                                    order to do this all we do is create a slope between the previous data points and
+                                    extrapolate the next point. We had to implement a low pass filter to denoise the
+                                    data a bit. We utilized the following code and got the following result:
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/647e9b13cedb33415bea111e8e24aa6d.js"></script>
                                 </p>
+                                <iframe width="560" height="315" src="https://youtube.com/embed/d2gv0wsVpq8"
+                                frameborder="0" allowfullscreen></iframe>
+                                
                                 <br>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
