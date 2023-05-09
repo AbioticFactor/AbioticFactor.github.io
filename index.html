@@ -1399,8 +1399,8 @@
                                         src="https://gist.github.com/AbioticFactor/647e9b13cedb33415bea111e8e24aa6d.js"></script>
                                 </p>
                                 <iframe width="560" height="315" src="https://youtube.com/embed/d2gv0wsVpq8"
-                                frameborder="0" allowfullscreen></iframe>
-                                
+                                    frameborder="0" allowfullscreen></iframe>
+
                                 <br>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
@@ -1729,8 +1729,7 @@
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
                                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                    Localization (simulator)</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1738,44 +1737,36 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
+                                <p class="mb-5">The goal of this lab is to localize our robot in simulation using a
+                                    Bayes filter</p>
 
-                                <h5>Hardware</h5>
+                                <h5>Software</h5>
                                 <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
-                                        alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
+                                    <li><b>Localization software</b>: This lab utilized an in-house localization
+                                        simulator Its specification (and my subsequent implementation) can be accessed
+                                        at this <a
+                                            href="https://drive.google.com/file/d/1UGsLxnQBjlY4JOWO6PfJY2bnxERFPAIo/view?usp=sharing">colab
+                                            notebook</a>.
+                                        The simulator includes 5 major classes: Commander for interacting with the
+                                        simulator, VirtualRobot for interacting with the robot, Mapper for operations
+                                        related to the map, BaseLocalization for functions needed for grid, and
+                                        Trajectory for encoding a pre-planning path for the robot
+                                        localization </li>
 
                                 </ul>
 
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
+                                    <li align="left">Prediction Step </li>
+                                    <li align="left">Update Step </li>
+                                    <li align="left">Motion Model </li>
+                                    <li align="left">Sensor Model </li>
+                                    <li align="left">Compute Control </li>
+                                    <li align="left">Demo </li>
                                 </ul>
 
-                                <h6>Oscilloscope Test</h6>
+                                <h6>Prediction Step</h6>
                                 <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
                                     supply and
                                     oscilliscope as shown below:
@@ -1799,7 +1790,7 @@
                                 </p>
                                 <br>
 
-                                <h6>Spin Test</h6>
+                                <h6>Update Step</h6>
                                 <p class="mb-5"> After setting up the car on its side as described in the
                                     directions I
                                     was able to use the code below to produce the motors spinning as
@@ -1814,7 +1805,7 @@
                                 </p>
                                 <br>
 
-                                <h6>double spin test</h6>
+                                <h6>Motion Model</h6>
                                 <p class="mb-5"> After fully wiring the car as shown below:
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
                                         alt="fully_wired" />
@@ -1828,7 +1819,7 @@
                                 </p>
                                 <br>
 
-                                <h6>Calibration</h6>
+                                <h6>Sensor Model</h6>
                                 <p class="mb-5"> In order to get my motor to spin at the same rate I had to
                                     find a
                                     callibnration factor. After testing a multitude of values I found that a
@@ -1843,16 +1834,14 @@
                                 </p>
                                 <br>
 
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
+                                <h6>Demo</h6>
+                                <p class="mb-5"> Attached below is a video of the results. While it generaly localizes pretty well, :
                                     <script
                                         src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
                                     <br>
                                 </p>
                                 <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/3REE0e219Ro"
                                         frameborder="0" allowfullscreen></iframe>
                                 </div>
 
