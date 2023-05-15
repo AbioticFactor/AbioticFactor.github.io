@@ -201,10 +201,10 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal12">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Reflection</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/reflection.jpg" alt="reflection" />
                     </div>
                 </div>
     </section>
@@ -1426,9 +1426,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 8:
+                                    Stunt!</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1436,10 +1435,8 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
+                                <p class="mb-5">The goal of this lab is to put together all of our work so far and get
+                                    our robot to complete a stunt</p>
 
                                 <h5>Hardware</h5>
                                 <ul>
@@ -1810,9 +1807,9 @@
                                 <br>
                                 <p class="mb-5"> Next is the predction step. We use this step to update our beliefs
                                     based on our previous beleifs and our odometry motion model. We iterate through
-                                    positions (with the nested for loops) and disregard any negligible cells (cells with < 0.0001 belief). For non negligible
-                                        cells we update our beleifs. Finally we must normalize as its a probability
-                                        distribution. <br>
+                                    positions (with the nested for loops) and disregard any negligible cells (cells with
+                                    < 0.0001 belief). For non negligible cells we update our beleifs. Finally we must
+                                        normalize as its a probability distribution. <br>
 
                                         We can produce the following code to implement the desired behavior:
                                         <br>
@@ -1829,7 +1826,8 @@
                                 <br>
                                 <p class="mb-5"> The next step is to compute the probability that our sensor readings
                                     were correct. For each pose we evaluate the probability of the sensor readings based
-                                    on the observations of our latest movements with a guassian and append it to a list of all the probabilties in qustion:
+                                    on the observations of our latest movements with a guassian and append it to a list
+                                    of all the probabilties in qustion:
                                     <br>
                                     <script
                                         src="https://gist.github.com/AbioticFactor/6109a439fb87b81c4a8ea9f5c839e6ce.js"></script>
@@ -1839,7 +1837,8 @@
                                 <br>
 
                                 <h6>Update step</h6>
-                                <p class="mb-5"> Finally we go through each pose and update the probability of our beliefs by using the values
+                                <p class="mb-5"> Finally we go through each pose and update the probability of our
+                                    beliefs by using the values
                                     computed in our sesor model. We update these beliefs and normalize
                                     (since its a probability):
                                     <br>
@@ -2038,9 +2037,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 13:
+                                    Reflection</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -2048,123 +2046,66 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
+                                <p class="mb-5">The goal of this "lab" is to reflect over the semester and what it has
+                                    taught me about online communication</p>
 
-                                <h5>Hardware</h5>
-                                <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
-                                        alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
-
-                                </ul>
-
-                                <h5>Lab Tasks</h5>
-                                <p>This lab included completing the following tasks:</p>
-                                <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
-                                </ul>
-
-                                <h6>Oscilloscope Test</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
-                                    <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
-                                        alt="posetup" />
-                                    <br>
-                                    I utilized the below code to test the functionality of the boards:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
-                                    <br>
-
+                                <h6>Reflection</h6>
+                                <p align="left class="mb-5"> Throughout ECE 4160: Fast Robots, I’ve gained significant hands-on
+                                    experience, not only with making a robot work while moving at breakneck speeds but
+                                    also with online communication. Over the course of one semester, I created a
+                                    detailed website documenting my work in this class. This forced me to create useful
+                                    documentation of my work and skills.
                                 </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
+                                
+                                <p class="mb-5">
+                                    Besides the graders, my target audience was definitely future potential employers in
+                                    the field of robotics. My dream is to go into the field of robotic perception and
+                                    implement computer vision algorithms on robots. The labs undertaken in this class
+                                    will be of particular importance in demonstrating that I know the basics of key
+                                    concepts like sensor fusion, PID control, and mapping. Combined with my work for
+                                    4701: Artificial Intelligence prac, I believe I will have a good portfolio to
+                                    demonstrate my skills.
                                 </p>
-                                <br>
 
-                                <h6>Spin Test</h6>
-                                <p class="mb-5"> After setting up the car on its side as described in the
-                                    directions I
-                                    was able to use the code below to produce the motors spinning as
-                                    intended in the
-                                    video below
+                                <p class="mb-5">
+                                    Inspiration for my portfolio came from a diverse range of sources, including
+                                    current/past students' websites, and maker-type tutorials. These sites influenced my
+                                    design choices and guided my understanding of a lot of the course material. The
+                                    beautiful and interactive aspects of many of my fellow students' websites appealed
+                                    to me, prompting me to add similar features into my own portfolio as well. This
+                                    being said, my portfolio is far from being done and needs a lot of work to be ready
+                                    for potential employers. A particularly time-strained semester led me to cut a few
+                                    corners to pump out lab reports faster.
+                                </p>
 
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
-                                    <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5">
+                                    Visual content remains an important part of my communication approach, as I found it
+                                    to be extremely efficient for conveying complex ideas and processes. They say a
+                                    picture speaks more than 1000 words, and that holds especially true here.
+                                    Images/videos and diagrams added an amount of clarity that simply isn't possible
+                                    with just text. Showing things on the robot simply worked better than describing
+                                    them. This also would heavily increase user retention as nobody wants to read a
+                                    giant block of text, especially recruiters.
                                 </p>
-                                <br>
 
-                                <h6>double spin test</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5">
+                                    My approach to online communication evolved significantly over the course of the
+                                    semester. At first, I was focused primarily on hitting the bullet points described
+                                    for lab write-ups. However, especially after the first 3023 meeting, I realized the
+                                    importance of this website as not just a class assignment but also a great way to
+                                    show the engineering process in my own unique way. I began to describe the unique
+                                    situations I faced and how I solved them. This added a personal touch and would
+                                    display to recruiters my ability to problem solve.
                                 </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
-                                </p>
-                                <br>
 
-                                <h6>Calibration</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5">
+                                    Overall, I found that creating this online portfolio was greatly valuable in getting
+                                    hands-on experience with online communication and documenting my work throughout the
+                                    semester. Having a concrete, shareable way to point to my work serves me far more
+                                    than just having a paper due every week showing my results. As I go on to graduate
+                                    and join the workforce, I will look back at this class as a key point in refining my
+                                    online communication skills.
                                 </p>
-                                <br>
-
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
-                                    <br>
-                                </p>
-                                <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </div>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
