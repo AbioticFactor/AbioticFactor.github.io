@@ -157,10 +157,10 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal8">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 8: Stunt!</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/stunt.png" alt="Stunt" />
                     </div>
                 </div>
                 <!-- Portfolio Item 9-->
@@ -168,10 +168,10 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal9">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 9: Mapping</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/map.jpg" alt="map" />
                     </div>
                 </div>
                 <!-- Portfolio Item 10-->
@@ -1436,116 +1436,53 @@
                                 </div>
                                 <!-- Portfolio Modal - Text-->
                                 <p class="mb-5">The goal of this lab is to put together all of our work so far and get
-                                    our robot to complete a stunt</p>
+                                    our robot to complete a stunt. I chose to perform position control on the robot</p>
 
                                 <h5>Hardware</h5>
                                 <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
+                                    <li><b>The robot</b>: This lab utilized the robot we have been building all
+                                        semester! </li>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
                                         alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
-
                                 </ul>
 
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
+                                    <li align="left">Position control </li>
+                                    <li align="left">Problems faced </li>
                                 </ul>
 
-                                <h6>Oscilloscope Test</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
-                                    <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
-                                        alt="posetup" />
-                                    <br>
-                                    I utilized the below code to test the functionality of the boards:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
+                                <h6>Position control</h6>
+                                <p class="mb-5"> In order to perform position control my robot had to start 4 meters
+                                    from the wall and quicly drive forward till it hits the black matt 0.5 meters from
+                                    the wall, flip and drive back in the opposite direction. To do this I simply ran
+                                    forward while getting the tof distance estimate (using the extrapolation function
+                                    from lab 7) and giving my robot full reverse power when it reaches the black mat.
+                                    after that I go in the opposite direction after waiting for a second so the robot
+                                    dosent immidiately go in the wrong direction (unreliable physics)
                                     <br>
 
-                                </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
+                                    <br>
+                                    I utilized the below code to perform this operation:
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/9d8686fe712b9e3796611e69ee9de98e.js"></script>
+
                                 </p>
                                 <br>
 
-                                <h6>Spin Test</h6>
-                                <p class="mb-5"> After setting up the car on its side as described in the
-                                    directions I
-                                    was able to use the code below to produce the motors spinning as
-                                    intended in the
-                                    video below
+                                <h6>Problems faced</h6>
+                                <p class="mb-5"> I faced a significant amount of challenges with this lab. Apart from
+                                    having a broken robot and having to work alongside my lab partner, Demian, we were
+                                    unable to get the robot to complete the task successuflly after many attempts. While
+                                    we could get the robot to flip, it was hard to get the robot to go back in the right
+                                    direction. Here are a few examples of this behavior:
 
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
-                                    <br>
                                     <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
 
-                                <h6>double spin test</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
-                                </p>
-                                <br>
-
-                                <h6>Calibration</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </p>
-                                <br>
-
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
-                                    <br>
-                                </p>
                                 <div class="embed-container">
                                     <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
                                         frameborder="0" allowfullscreen></iframe>
@@ -1574,9 +1511,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 9:
+                                    Mapping</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1584,68 +1520,33 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
-
-                                <h5>Hardware</h5>
-                                <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
-                                        alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
-
-                                </ul>
+                                <p class="mb-5">The goal of this lab is to use our robot's gyroscope and IMU to map out
+                                    a static room</p>
 
                                 <h5>Lab Tasks</h5>
                                 <p>This lab included completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
+                                    <li align="left">Angular speed control </li>
+                                    <li align="left">Read out Distances </li>
+                                    <li align="left">Merge and Plot your readings </li>
+                                    <li align="left">Convert to Line-Based Map </li>
                                 </ul>
 
-                                <h6>Oscilloscope Test</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
-                                    <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
-                                        alt="posetup" />
-                                    <br>
-                                    I utilized the below code to test the functionality of the boards:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
-                                    <br>
+                                <h6>Angular speed control</h6>
+                                <p class="mb-5"> In order to make my robot spin, I opted to use angular speed control as
+                                    I already had work done for speed control for my PID controller in lab 6...
+   
+                                    I utilized the below implement angular speed control on the robot:
+                                    <script src="https://gist.github.com/AbioticFactor/e700387ddb904a803d14fb27e444a210.js"></script>
 
                                 </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
+                                <p class="mb-5"> I got these results when testing in real life:
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/4HpTMi9Gfig"
+                                        frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
 
-                                <h6>Spin Test</h6>
+                                <h6>Read out Distances</h6>
                                 <p class="mb-5"> After setting up the car on its side as described in the
                                     directions I
                                     was able to use the code below to produce the motors spinning as
@@ -1660,7 +1561,7 @@
                                 </p>
                                 <br>
 
-                                <h6>double spin test</h6>
+                                <h6>Merge and Plot your readings</h6>
                                 <p class="mb-5"> After fully wiring the car as shown below:
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
                                         alt="fully_wired" />
@@ -1674,7 +1575,7 @@
                                 </p>
                                 <br>
 
-                                <h6>Calibration</h6>
+                                <h6>Convert to Line-Based Map</h6>
                                 <p class="mb-5"> In order to get my motor to spin at the same rate I had to
                                     find a
                                     callibnration factor. After testing a multitude of values I found that a
@@ -1688,19 +1589,6 @@
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
-
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
-                                    <br>
-                                </p>
-                                <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </div>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
@@ -2050,13 +1938,14 @@
                                     taught me about online communication</p>
 
                                 <h6>Reflection</h6>
-                                <p align="left class="mb-5"> Throughout ECE 4160: Fast Robots, I’ve gained significant hands-on
+                                <p align="left class=" mb-5"> Throughout ECE 4160: Fast Robots, I’ve gained significant
+                                    hands-on
                                     experience, not only with making a robot work while moving at breakneck speeds but
                                     also with online communication. Over the course of one semester, I created a
                                     detailed website documenting my work in this class. This forced me to create useful
                                     documentation of my work and skills.
                                 </p>
-                                
+
                                 <p class="mb-5">
                                     Besides the graders, my target audience was definitely future potential employers in
                                     the field of robotics. My dream is to go into the field of robotic perception and
