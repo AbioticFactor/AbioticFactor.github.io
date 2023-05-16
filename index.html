@@ -179,8 +179,8 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal10">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 10: Localiztion (simulator)</div>
                         </div>
                         <img class="img-fluid" src="assets/img/portfolio/bayes.png" alt="Bayes" />
                     </div>
@@ -1518,7 +1518,8 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to use our robot's gyroscope and IMU to map out
+                                <p class="mb-5">The goal of this lab is to fuse data from our robot's gyroscope and
+                                    IMU's to map out
                                     a static room</p>
 
                                 <h5>Lab Tasks</h5>
@@ -1532,14 +1533,25 @@
 
                                 <h6>Angular speed control</h6>
                                 <p class="mb-5"> In order to make my robot spin, I opted to use angular speed control as
-                                    I already had work done for speed control for my PID controller in lab 6...
-
-                                    I utilized the below implement angular speed control on the robot:
+                                    I already had work done for speed control for my PID controller in lab 6. I utilized
+                                    the code below implement angular speed control on the robot:
                                     <script
                                         src="https://gist.github.com/AbioticFactor/e700387ddb904a803d14fb27e444a210.js"></script>
+                                </p>
+
+
+                                <p class="mb-5">
+                                    After expirementing with multiple values I found that using a pwm value of 130, a P
+                                    value of 1.9, and running my PID control for 11.6 seconds yielded a slow enough turn
+                                    rate to sample values from my TOF sensor. I encountered an issue where my right side
+                                    turn wheels were far looser than my left side. With a large enough correcting factor
+                                    the robot can still turn however on a bit of a radius sometimes. A TA said this
+                                    wouldnt be enough to severly affect my results for this lab so I moved forward.
 
                                 </p>
-                                <p class="mb-5"> I got these results when testing in real life:
+
+                                </p>
+                                <p class="mb-5">
                                     <iframe width="560" height="315" src="https://youtube.com/embed/4HpTMi9Gfig"
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
@@ -1548,40 +1560,43 @@
                                 <h6>Read out Distances</h6>
                                 <p class="mb-5"> My robots dynamics were far too inconsistent to simply rely on
                                     time-spaced values, so I opted to combine my gyroscope and TOF data to create my
-                                    graphs...
+                                    graphs. I utilized the following python code and got the corresponding graphs.
 
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/f3256aea9cafa188a31532d6c27d379f.js"></script>
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
-                                        frameborder="0" allowfullscreen></iframe>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc4.png" alt="posetup"
+                                        width="300" height="300" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc3.png" alt="posetup"
+                                        width="300" height="300" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc1.png" alt="posetup"
+                                        width="300" height="300" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc2.png" alt="posetup"
+                                        width="300" height="300" />
+
+                                    <br>
                                 </p>
                                 <br>
 
                                 <h6>Merge and Plot your readings</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5">
+                                    The next step was to convert my points from polar to cartesian units. Using
+                                    inspiration from Ryan Chan's page I converted all my points with this function and
+                                    got the following results
+
+
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/3565fdde9799b268b3c0f68e7e97c3ba.js"></script>
+
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/merge.png" alt="posetup" />
+
                                 </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
-                                </p>
+
                                 <br>
 
                                 <h6>Convert to Line-Based Map</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
+                                <p class="mb-5"> The final step was to convert to a line based map so we can utilize our
+                                    results with the simulator.
                                     <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
