@@ -1426,8 +1426,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 8:
-                                    Stunt!</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 8: Stunt!</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1435,86 +1434,114 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to put together all of our work so far and get
-                                    our robot to complete a stunt. I chose to perform position control on the robot</p>
+                                <p class="mb-5" style="text-align: left;">The goal of this lab was to integrate all the
+                                    parts of this semester so far and utilize it to program
+                                    our robot to perform a stunt. My chosen stunt was to implement position control on
+                                    the robot. I chose position control as it aligns with my lab 6 task.</p>
 
                                 <h5>Hardware</h5>
                                 <ul>
-                                    <li><b>The robot</b>: This lab utilized the robot we have been building all
-                                        semester! </li>
+                                    <li style="text-align: left;"><b>The Robot</b>: This lab employed the robot we have
+                                        been diligently constructing throughout the semester. Due to some technical
+                                        issues with my own robot, I decided to use my partner's robot which was
+                                        functioning optimally. This was a crucial decision as the precision required for
+                                        this lab was incompatible with the issues my robot was facing.</li>
                                 </ul>
 
                                 <h5>Lab Tasks</h5>
-                                <p>This lab included completing the following tasks:</p>
+                                <p style="text-align: left;">The lab consisted of the following tasks:</p>
                                 <ul>
-                                    <li align="left">Position control </li>
-                                    <li align="left">Problems faced </li>
+                                    <li align="left">Implementing position control</li>
+                                    <li align="left">Addressing and resolving issues encountered</li>
                                 </ul>
 
                                 <h6>Position control</h6>
-                                <p class="mb-5"> In order to perform position control my robot had to start 4 meters
-                                    from the wall and quicly drive forward till it hits the black matt 0.5 meters from
-                                    the wall, flip and drive back in the opposite direction. To do this I simply ran
-                                    forward while getting the tof distance estimate (using the extrapolation function
-                                    from lab 7) and giving my robot full reverse power when it reaches the black mat.
-                                    after that I go in the opposite direction after waiting for a second so the robot
-                                    dosent immidiately go in the wrong direction (unreliable physics)
+                                <p class="mb-5" style="text-align: left;"> The task of position control required the
+                                    robot to start 4 meters away from a wall, quickly drive forward until it hit a black
+                                    mat located 0.5 meters from the wall, perform a flip, and then drive back in the
+                                    opposite direction. To achieve this, I programmed the robot to move forward
+                                    continuously while measuring the distance to the wall using the time of flight (TOF)
+                                    sensor, and to reverse its direction once it reached the black mat. To ensure the
+                                    robot did not immediately deviate off course due to unreliable stopping, I
+                                    incorporated a one-second delay before it started to move in the opposite direction.
+
                                     <br>
 
                                     <br>
-                                    I utilized the below code to perform this operation:
+                                    To handle this task, I created a new function in my Arduino file, using the
+                                    following C code:
                                     <script
                                         src="https://gist.github.com/AbioticFactor/9d8686fe712b9e3796611e69ee9de98e.js"></script>
 
                                 </p>
                                 <br>
 
-                                <h6>Problems faced</h6>
-                                <p class="mb-5"> I faced a significant amount of challenges with this lab. Apart from
-                                    having a broken robot and having to work alongside my lab partner, Demian, we were
-                                    unable to get the robot to complete the task successuflly after many attempts. While
-                                    we could get the robot to flip, it was hard to get the robot to go back in the right
-                                    direction. The robot falls short due to an inbility to get the physics correct on
-                                    the return action.
-                                    Here are a few examples of this behavior:
+                                <h6>Challenges Encountered</h6>
+                                <p class="mb-5" style="text-align: left;"> The lab was riddled with challenges. In
+                                    addition to working with a malfunctioning robot, my partner and I faced difficulties
+                                    in getting the robot to successfully complete the stunt despite multiple attempts.
+                                    Although we were able to get the robot to flip, it consistently failed to return in
+                                    the correct direction. This was due to the robot's inability to correctly execute
+                                    the physics of the return action. Here are a few examples of this behavior:
 
 
 
                                 </p>
                                 <br>
 
-                                <p class="mb-5">
-                                    Here the robot is able to perform a flip but unable to return
-                                    in the right direction. This occurs as the robot lands on its side instead of the
-                                    opposite direction and when it tries to reverse it just flips again.
+                                <p class="mb-5" style="text-align: left;">
+                                    In the first scenario, the robot was able to perform a flip, but failed to return in
+                                    the correct direction. This was due to the robot landing on its side instead of
+                                    turning in the opposite direction. When it tried to reverse, it ended up flipping
+                                    again.
                                     <br>
                                     <iframe width="560" height="315" src="https://youtube.com/embed/83eLbCt-kuw"
                                         frameborder="0" allowfullscreen></iframe>
 
                                 </p>
 
-                                <p class="mb-5">
-                                    Here the robot is able to perform a flip but bounces right back onto its side. This
-                                    occurs as the robot bounces after landing instead of turning in
-                                    opposite direction and when it tries to reverse it goes in the wrong directon. This
-                                    is in line with how a lot of our runs went. <br>
+                                <p class="mb-5" style="text-align: left;">
+                                    In another instance, the robot managed to flip but bounced back onto its side. This
+                                    was because the robot would bounce after landing, rather than turning in the
+                                    opposite direction. When it tried to reverse, it went in the wrong direction. This
+                                    issue was consistent across many of our test runs.
+                                    <br>
                                     <iframe width="560" height="315" src="https://youtube.com/embed/_yiv58DiXM0"
                                         frameborder="0" allowfullscreen></iframe>
 
                                 </p>
 
-                                <p class="mb-5">
-                                    I attempted many things to try and get the robot to succesffuly complete the
-                                    action but they all seem to have almsot no effect. I have tried a variety physical
-                                    solutions such as differing battery
-                                    levels, different floors, different speeds, and modifying the robots chasis (extra
-                                    weight in the battery holder and tape/ rubber bands on wheels). I have also tried
-                                    programmtic solutions like using slow decay on the motors, and changing the
-                                    calibration factor between the two sides. I haven't given up yet as I will conintue
-                                    to
-                                    try and get a stunt up and running as I move onto the other labs.
+                                <p class="mb-5" style="text-align: left;">
+                                    Despite these consistent errors, the robot was surprisingly consistent in reaching
+                                    the goal and nearly completing or successfully completing the flip. Although we did
+                                    not encounter many major errors, we did have a few amusing bloopers.
+                                    <br>
+                                    <iframe width="560" height="315" src="https://youtube.com/embed/A0drvvvvLLjHjRs"
+                                        frameborder="0" allowfullscreen></iframe>
 
                                 </p>
+
+                                <p class="mb-5" style="text-align: left;">
+                                    I made numerous attempts to get the robot to successfully complete the action. These
+                                    included a variety of physical modifications such as altering battery levels,
+                                    testing different floor surfaces, adjusting speeds, and modifying the robot's
+                                    chassis (including adding extra weight to the battery holder and applying tape and
+                                    rubber bands to the wheels).
+
+                                </p>
+
+                                <p class="mb-5" style="text-align: left;">
+                                    I also tried programmatic solutions, including using slow decay on the motors and
+                                    adjusting the calibration factor between the two sides. Although I was confident
+                                    that the TOF sensors were not the issue (as our data was consistently reliable), I
+                                    even experimented with different range modes, integration times, and loop sampling
+                                    rates.
+
+                                    I haven't given up yet. I remain determined to get the stunt up and running, even as
+                                    I shift my focus to the remaining labs.
+
+                                </p>
+
 
 
 
