@@ -1442,17 +1442,17 @@
                                 <h5>Hardware</h5>
                                 <ul>
                                     <li style="text-align: left;"><b>The Robot</b>: This lab employed the robot we have
-                                        been diligently constructing throughout the semester. Due to some technical
-                                        issues with my own robot, I decided to use my partner's robot which was
-                                        functioning optimally. This was a crucial decision as the precision required for
-                                        this lab was incompatible with the issues my robot was facing.</li>
+                                        constructed throughout the semester. Due to some technical
+                                        issues with my own robot, where the wheels on the left side of my chassis
+                                        weren't functional (found out it was the result of a faulty motor driver), I
+                                        decided to use my partner's robot which worked well.</li>
                                 </ul>
 
                                 <h5>Lab Tasks</h5>
                                 <p style="text-align: left;">The lab consisted of the following tasks:</p>
                                 <ul>
                                     <li align="left">Implementing position control</li>
-                                    <li align="left">Addressing and resolving issues encountered</li>
+                                    <li align="left">Issues encountered</li>
                                 </ul>
 
                                 <h6>Position control</h6>
@@ -1484,8 +1484,6 @@
                                     the correct direction. This was due to the robot's inability to correctly execute
                                     the physics of the return action. Here are a few examples of this behavior:
 
-
-
                                 </p>
                                 <br>
 
@@ -1504,7 +1502,7 @@
                                     In another instance, the robot managed to flip but bounced back onto its side. This
                                     was because the robot would bounce after landing, rather than turning in the
                                     opposite direction. When it tried to reverse, it went in the wrong direction. This
-                                    issue was consistent across many of our test runs.
+                                    issue was consistent across all of our "best" test runs.
                                     <br>
                                     <iframe width="560" height="315" src="https://youtube.com/embed/_yiv58DiXM0"
                                         frameborder="0" allowfullscreen></iframe>
@@ -1514,7 +1512,8 @@
                                 <p class="mb-5" style="text-align: left;">
                                     Despite these consistent errors, the robot was surprisingly consistent in reaching
                                     the goal and nearly completing or successfully completing the flip. Although we did
-                                    not encounter many major errors, we did have a few amusing bloopers.
+                                    not encounter that many major errors once we implemented the 1 second delay, we did
+                                    have this interesting blooper.
                                     <br>
                                     <iframe width="560" height="315" src="https://youtube.com/embed/A0drvvvvLLjHjRs"
                                         frameborder="0" allowfullscreen></iframe>
@@ -1523,7 +1522,7 @@
 
                                 <p class="mb-5" style="text-align: left;">
                                     I made numerous attempts to get the robot to successfully complete the action. These
-                                    included a variety of physical modifications such as altering battery levels,
+                                    included physical modifications such as altering battery levels,
                                     testing different floor surfaces, adjusting speeds, and modifying the robot's
                                     chassis (including adding extra weight to the battery holder and applying tape and
                                     rubber bands to the wheels).
@@ -1533,12 +1532,12 @@
                                 <p class="mb-5" style="text-align: left;">
                                     I also tried programmatic solutions, including using slow decay on the motors and
                                     adjusting the calibration factor between the two sides. Although I was confident
-                                    that the TOF sensors were not the issue (as our data was consistently reliable), I
+                                    that the TOF sensors were not the issue (our data was very smooth and correct), I
                                     even experimented with different range modes, integration times, and loop sampling
                                     rates.
 
-                                    I haven't given up yet. I remain determined to get the stunt up and running, even as
-                                    I shift my focus to the remaining labs.
+                                    I haven't given up yet. I really want to get the stunt up and running, even as
+                                    I move on to the remaining labs.
 
                                 </p>
 
@@ -1568,8 +1567,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 9:
-                                    Mapping</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 9: Mapping</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1577,72 +1575,73 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to fuse data from our robot's gyroscope and
-                                    IMU's to map out
-                                    a static room</p>
+                                <p class="mb-5" style="text-align: left;">The primary objective of this lab was to
+                                    fuse data from the gyroscope and inertial measurement unit (IMU) on our robot
+                                    to create a detailed map of a static room.</p>
 
                                 <h5>Lab Tasks</h5>
-                                <p>This lab included completing the following tasks:</p>
+                                <p style="text-align: left;">This lab involved completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Angular speed control </li>
-                                    <li align="left">Read out Distances </li>
-                                    <li align="left">Merge and Plot your readings </li>
-                                    <li align="left">Convert to Line-Based Map </li>
+                                    <li align="left">Implementing angular speed control</li>
+                                    <li align="left">Reading and recording distance measurements</li>
+                                    <li align="left">Merging and plotting the readings</li>
+                                    <li align="left">Converting the readings to a line-based map</li>
+                                    <li align="left">Discussing and analyzing the results</li>
                                 </ul>
 
-                                <h6>Angular speed control</h6>
-                                <p class="mb-5"> In order to make my robot spin, I opted to use angular speed control as
-                                    I already had work done for speed control for my PID controller in lab 6. I utilized
-                                    the code below implement angular speed control on the robot:
+                                <h6>Angular Speed Control</h6>
+                                <p class="mb-5" style="text-align: left;">To make the robot spin, I utilized angular
+                                    speed control, taking advantage of the PID controller I had previously developed in
+                                    Lab 6 for position control. The following code snippet demonstrates how I
+                                    implemented
+                                    angular speed control on the robot:
                                     <script
                                         src="https://gist.github.com/AbioticFactor/e700387ddb904a803d14fb27e444a210.js"></script>
                                 </p>
 
-
-                                <p class="mb-5">
-                                    After expirementing with multiple values I found that using a pwm value of 130, a P
-                                    value of 1.9, and running my PID control for 11.6 seconds yielded a slow enough turn
-                                    rate to sample values from my TOF sensor. I encountered an issue where my right side
-                                    turn wheels were far looser than my left side. With a large enough correcting factor
-                                    the robot can still turn however on a bit of a radius sometimes. A TA said this
-                                    wouldnt be enough to severly affect my results for this lab so I moved forward.
-
+                                <p class="mb-5" style="text-align: left;">
+                                    After several experiments with different parameters, I found that a PWM value of
+                                    130, a P value of 1.9, and running my PID control for 11.6 seconds produced a slow
+                                    enough turn rate for adequate sampling from the TOF sensor. Despite some initial
+                                    challenges with the right side wheels being looser than the left, resulting in a
+                                    large turning radius, I was able to correct this a bit with a compensating factor.
+                                    However, even with the factorintroduced my behavior was inconsistent even within the
+                                    same turn. This called for
+                                    multiple samples for a decent
+                                    result. Despite these issues, I was told that it wouldn't severely affect the lab
+                                    results, so I proceeded with the tasks.
                                 </p>
 
-                                </p>
-                                <p class="mb-5">
+                                <p class="mb-5" style="text-align: left;">
                                     <iframe width="560" height="315" src="https://youtube.com/embed/4HpTMi9Gfig"
                                         frameborder="0" allowfullscreen></iframe>
                                 </p>
                                 <br>
 
                                 <h6>Read out Distances</h6>
-                                <p class="mb-5"> My robots dynamics were far too inconsistent to simply rely on
-                                    time-spaced values, so I opted to combine my gyroscope and TOF data to create my
-                                    graphs. I utilized the following python code and got the corresponding graphs.
+                                <p class="mb-5" style="text-align: left;">Given the inconsistency in my robot's
+                                    dynamics, I decided to combine gyroscope and TOF data for creating my graphs. I
+                                    implemented the following Python code and obtained the resulting graphs.
 
                                     <script
                                         src="https://gist.github.com/AbioticFactor/f3256aea9cafa188a31532d6c27d379f.js"></script>
                                     <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc4.png" alt="posetup"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc4.png" alt="sc4"
                                         width="300" height="300" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc3.png" alt="posetup"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc3.png" alt="sc3"
                                         width="300" height="300" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc1.png" alt="posetup"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc1.png" alt="sc1"
                                         width="300" height="300" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc2.png" alt="posetup"
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sc2.png" alt="sc2"
                                         width="300" height="300" />
 
                                     <br>
                                 </p>
-                                <br>
 
-                                <h6>Merge and Plot your readings</h6>
-                                <p class="mb-5">
-                                    The next step was to convert my points from polar to cartesian units. Using
-                                    inspiration from Ryan Chan's page I converted all my points with this function and
-                                    got the following results (they arent that great, current work in progress)
-
+                                <h6>Merge and Plot your Readings</h6>
+                                <p class="mb-5" style="text-align: left;">The next task was to convert my points from
+                                    polar to Cartesian coordinates. I used a function inspired by the one on Ryan Chan's
+                                    page for this purpose.
 
                                     <script
                                         src="https://gist.github.com/AbioticFactor/3565fdde9799b268b3c0f68e7e97c3ba.js"></script>
@@ -1651,13 +1650,36 @@
 
                                 </p>
 
-                                <br>
-
                                 <h6>Convert to Line-Based Map</h6>
-                                <p class="mb-5"> The final step was to convert to a line based map so we can utilize our
-                                    results with the simulator.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
+                                <p class="mb-5" style="text-align: left;">The final task was to convert the readings
+                                    into a line-based map to make it compatible with our simulator. After correcting for
+                                    my sensor angle and distance offset as well as the direction I took my measurements I overlaid my data
+                                    with Vivek's data to validate the results.
+
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/b261f905a185ccea6fd16f61372cc3ad.js"></script>
+
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/final_map.png" alt="final_map" />
+
+                                </p>
+
+                                <h6>Discussion of results</h6>
+                                <p class="mb-5" style="text-align: left;"> My results were honestly quite terrible so I
+                                    checked out my TOF sensor data
+                                    with
+                                    a TA and discovered it gives me a wide spread of data points even when stationary.
+                                    With a worst case variance up to 600mm for objects that arent super close in lab at
+                                    the exact same spot. Since my TOF sensor
+                                    worked well in lab
+                                    3, I hypothesize that this is
+                                    a result of smashing my time of flight
+                                    sensor repeatedly into the wall attemping lab 6-8. If I were to go back I would 100%
+                                    3D print shielding for my sensor and save myself the headache. Along with my
+                                    inconsistent turn radius which led edge values to be inconsistenly really close
+                                    sometimes. even my other TOF sensor results
+                                    looked simmilar. I will surely be borrwing someone elses robot
+                                    to get better results for
+                                    lab 11 and 12 but I was sadly out of time here:
                                 </p>
                                 <br>
 
