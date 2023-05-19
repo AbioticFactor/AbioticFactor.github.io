@@ -180,7 +180,7 @@
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
-                                Lab 10: Localiztion (simulator)</div>
+                                Lab 10: Localiztion (Simulator)</div>
                         </div>
                         <img class="img-fluid" src="assets/img/portfolio/bayes.png" alt="Bayes" />
                     </div>
@@ -190,10 +190,10 @@
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal11">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 11: Localiztion (Real)</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine" />
+                        <img class="img-fluid" src="assets/img/portfolio/lab11.png" alt="lab11" />
                     </div>
                 </div>
                 <!-- Portfolio Item 12-->
@@ -1532,7 +1532,8 @@
                                 <p class="mb-5" style="text-align: left;">
                                     I also tried programmatic solutions, including using slow decay on the motors and
                                     adjusting the calibration factor between the two sides. Although I was confident
-                                    that the TOF sensors were not the issue (our data was very smooth and correct as shown below), I
+                                    that the TOF sensors were not the issue (our data was very smooth and correct as
+                                    shown below), I
                                     even experimented with different range modes, integration times, and loop sampling
                                     rates.
 
@@ -1541,7 +1542,7 @@
 
                                 </p>
                                 <img class="img-fluid rounded mb-5" src="assets/img/lab8/graph.png" alt="sc4"
-                                        width="300" height="300" />
+                                    width="300" height="300" />
 
 
 
@@ -1654,13 +1655,15 @@
                                 <h6>Convert to Line-Based Map</h6>
                                 <p class="mb-5" style="text-align: left;">The final task was to convert the readings
                                     into a line-based map to make it compatible with our simulator. After correcting for
-                                    my sensor angle and distance offset as well as the direction I took my measurements I overlaid my data
+                                    my sensor angle and distance offset as well as the direction I took my measurements
+                                    I overlaid my data
                                     with Vivek's data to validate the results.
 
                                     <script
                                         src="https://gist.github.com/AbioticFactor/b261f905a185ccea6fd16f61372cc3ad.js"></script>
 
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/final_map.png" alt="final_map" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/final_map.png"
+                                        alt="final_map" />
 
                                 </p>
 
@@ -1868,9 +1871,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab5:
-                                    Motors and
-                                    Open Loop Control</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 11:
+                                    LOCALIZATION (REAL)</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -1878,123 +1880,111 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">The goal of this lab is to convert our robot from manual to
-                                    open loop control using the artemis. This rquires the addition of two
-                                    motor controllers
-                                    to our board</p>
-
-                                <h5>Hardware</h5>
-                                <ul>
-                                    <li><b>DRV8833 Dual H-Bridge Motor Driver (2x)</b>: This lab utilized a
-                                        DRV8833 Dual
-                                        H-Bridge Motor Driver. Its data sheet can be found <a
-                                            href="https://www.mouser.com/ProductDetail/SparkFun/SEN-15335?qs=uwxL4vQweFMcls1MYZT00A%3D%3D">here</a>.
-                                        This driver is capable of driving either two DC motors or
-                                        one stepper motor. For our purposes, we
-                                        will elect to drive two DC motors. One important note is that we
-                                        will use a
-                                        seperate battery to power the motors and the motor controllers. This
-                                        is mainly to
-                                        reduce the noise betwwen the motors and the artemis.
-                                        I wired it to my artemis as shown below: </li>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/Hbridge_wiring.png"
-                                        alt="Hbridge_wiring" />
-                                    I chose pins 7, 11, 12, and 13 as they are PWM capable pins and are
-                                    easily
-                                    accessible with my current coniguration.
-
-                                </ul>
+                                <p class="mb-5">The goal of this lab is to use our mapping from lab 9 along with our
+                                    bayes filter from lab 10 to implement localization in real life. </p>
 
                                 <h5>Lab Tasks</h5>
-                                <p>This lab included completing the following tasks:</p>
+                                <p style="text-align: left;">This lab involved completing the following tasks:</p>
                                 <ul>
-                                    <li align="left">Oscilloscope Test </li>
-                                    <li align="left">Spin Test </li>
-                                    <li align="left">double spin test </li>
-                                    <li align="left">Calibration </li>
-                                    <li align="left">Open Loop </li>
+                                    <li align="left">Simulation</li>
+                                    <li align="left">Localization code</li>
+                                    <li align="left">Localization testing</li>
                                 </ul>
 
-                                <h6>Oscilloscope Test</h6>
-                                <p class="mb-5"> In order to use the Oscilloscope I hooked up the power
-                                    supply and
-                                    oscilliscope as shown below:
-                                    <br>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/powiring.png"
-                                        alt="posetup" />
-                                    <br>
-                                    I utilized the below code to test the functionality of the boards:
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/2bef2165b3cfb71cd76f20e6c95b1783.js"></script>
-                                    <br>
+                                <h6>Simulation</h6>
+                                <p class="mb-5" style="text-align: left;">The first step was to run the optimal version
+                                    of the simulation code we implemented in lab 10 and observe the localization.
+                                    Overall I found it was very simmilar to the results I recieved in lab 10.
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/sim.png" alt="sim" />
+                                </p>
 
-                                </p>
-                                <p class="mb-5"> Changing only the PWM signal from 100 to 200 I was able to
-                                    generate these two graphs
-                                    enusring my motor drivers worked and I could manipulate the duty cycle.
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_1.png"
-                                        alt="ft_graph" />
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/oscilliscope_2.png"
-                                        alt="ft_graph" />
-                                </p>
                                 <br>
 
-                                <h6>Spin Test</h6>
-                                <p class="mb-5"> After setting up the car on its side as described in the
-                                    directions I
-                                    was able to use the code below to produce the motors spinning as
-                                    intended in the
-                                    video below
+                                <h6>Localization code</h6>
+                                <p class="mb-5" style="text-align: left;">The next step was to implement localization
+                                    code from lab 9 into the "perform_observation_loop". I had to slightly edit my data
+                                    to get it into the correct format for the given localization code. I needed to
+                                    repersent my vector as a numpy array, sample 18 values from my data, and invert my
+                                    list (as my robot goes counterclockwise).
 
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/c23f2d4e36cedb905ccd110c7ac973c0.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/fb8b46fbf6ee41fd324c91e30e88d9fa.js"></script>
+
                                     <br>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/Xy3TWTD_0tA"
-                                        frameborder="0" allowfullscreen></iframe>
                                 </p>
-                                <br>
+                                <p class="mb-5" style="text-align: left;">The issue is that this code does not perform
+                                    as well as I needed for localization with my points constantly being on the
+                                    opposiute corners of the map. The robot should have been at the point (5,-3) but it
+                                    localizes on the other side at (5, 3):
 
-                                <h6>double spin test</h6>
-                                <p class="mb-5"> After fully wiring the car as shown below:
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/fully_wired.png"
-                                        alt="fully_wired" />
-                                    I was able to run the car on the ground:
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/hDqHDLe8VZ4"
-                                        frameborder="0" allowfullscreen></iframe>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
+                                        alt="bad" />
+                                    <br>
                                 </p>
-                                <p class="mb-5"> I found that a PWM value of 45 was the lowest possible
-                                    value for the
-                                    car to move forward and on axis turn.
-                                </p>
-                                <br>
 
-                                <h6>Calibration</h6>
-                                <p class="mb-5"> In order to get my motor to spin at the same rate I had to
-                                    find a
-                                    callibnration factor. After testing a multitude of values I found that a
-                                    ratio of
-                                    1.25 right/left side worked the
-                                    best. I tested this by making the robot follow a piece of tape for 7
-                                    feet and
-                                    evaluating if it could follow the line. Here you
-                                    can see my robot running in a straight line after calibration.
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/95-SYOFwIwE"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </p>
-                                <br>
+                                <p class="mb-5" style="text-align: left;">In order to remedy this I decided to switch to
+                                    doing angular PID control as I currently trust my robot too much to give accurate
+                                    speed based angles. I utilize the following code to perform angular control (WORK IN
+                                    PROGRESS):
 
-                                <h6>Open Loop</h6>
-                                <p class="mb-5"> Finally I used open loop control to manuever my robot with
-                                    the code
-                                    below and produced the video below using the corresponding code:
                                     <script
-                                        src="https://gist.github.com/AbioticFactor/3c8c66297fe321eae5ecb5e7b641acf2.js"></script>
+                                        src="https://gist.github.com/AbioticFactor/fb8b46fbf6ee41fd324c91e30e88d9fa.js"></script>
                                     <br>
                                 </p>
-                                <div class="embed-container">
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/fQHruqbsfMY"
-                                        frameborder="0" allowfullscreen></iframe>
-                                </div>
+
+                                <h6>Localization testing</h6>
+                                <p class="mb-5" style="text-align: left;">The last task was to give my new beleifs at
+                                    every point. Using my new code I recieved the following at the points (5,3), (5, -3), (0, 3), and (-3, -2) respectively:
+
+
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
+                                        alt="bad" />
+                                        
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
+                                    alt="bad" />
+                                    
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
+                                        alt="bad" />
+                                        
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
+                                    alt="bad" />
+
+                                </p>
+
+                                <h6>Convert to Line-Based Map</h6>
+                                <p class="mb-5" style="text-align: left;">The final task was to convert the readings
+                                    into a line-based map to make it compatible with our simulator. After correcting for
+                                    my sensor angle and distance offset as well as the direction I took my measurements
+                                    I overlaid my data
+                                    with Vivek's data to validate the results.
+
+                                    <script
+                                        src="https://gist.github.com/AbioticFactor/b261f905a185ccea6fd16f61372cc3ad.js"></script>
+
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/final_map.png"
+                                        alt="final_map" />
+
+                                </p>
+
+                                <h6>Discussion of results</h6>
+                                <p class="mb-5" style="text-align: left;"> My results were honestly quite terrible so I
+                                    checked out my TOF sensor data
+                                    with
+                                    a TA and discovered it gives me a wide spread of data points even when stationary.
+                                    With a worst case variance up to 600mm for objects that arent super close in lab at
+                                    the exact same spot. Since my TOF sensor
+                                    worked well in lab
+                                    3, I hypothesize that this is
+                                    a result of smashing my time of flight
+                                    sensor repeatedly into the wall attemping lab 6-8. If I were to go back I would 100%
+                                    3D print shielding for my sensor and save myself the headache. Along with my
+                                    inconsistent turn radius which led edge values to be inconsistenly really close
+                                    sometimes. even my other TOF sensor results
+                                    looked simmilar. I will surely be borrwing someone elses robot
+                                    to get better results for
+                                    lab 11 and 12 but I was sadly out of time here:
+                                </p>
+                                <br>
 
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
