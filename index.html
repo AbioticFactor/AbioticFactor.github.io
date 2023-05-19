@@ -193,7 +193,7 @@
                             <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
                                 Lab 11: Localiztion (Real)</div>
                         </div>
-                        <img class="img-fluid" src="assets/img/portfolio/lab11.png" alt="lab11" />
+                        <img class="img-fluid" src="assets/img/lab11/5neg3BR.png" alt="lab11" />
                     </div>
                 </div>
                 <!-- Portfolio Item 12-->
@@ -1880,7 +1880,7 @@
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Text-->
-                                <p class="mb-5">WORK IN PROGRESS The goal of this lab is to use our mapping from lab 9 along with our
+                                <p class="mb-5"> The goal of this lab is to use our mapping from lab 9 along with our
                                     bayes filter from lab 10 to implement localization in real life. </p>
 
                                 <h5>Lab Tasks</h5>
@@ -1924,14 +1924,11 @@
                                     <br>
                                 </p>
 
-                                <p class="mb-5" style="text-align: left;">In order to remedy this I decided to switch to
-                                    doing angular PID control as I currently trust my robot too much to give accurate
-                                    speed based angles. I utilize the following code to perform angular control (WORK IN
-                                    PROGRESS):
+                                <p class="mb-5" style="text-align: left;">In order to remedy this I had to work towards
+                                    making my robot spin slower, after modifying my tape (the grey duck tape isnt sticky
+                                    enough) and using the right battery level I was able to get the almost perfect
+                                    results shown in the next section:
 
-                                    <script
-                                        src="https://gist.github.com/AbioticFactor/fb8b46fbf6ee41fd324c91e30e88d9fa.js"></script>
-                                    <br>
                                 </p>
 
                                 <h6>Localization testing</h6>
@@ -1940,23 +1937,24 @@
                                     -3), (0, 3), and (-3, -2) respectively:
 
 
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
-                                        alt="bad" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/fivethree.png"
+                                        alt="good" />
 
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
-                                        alt="bad" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/5neg3BR.png" alt="good" />
 
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
-                                        alt="bad" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/zero3.png" alt="good" />
 
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/bad_mapping.png"
-                                        alt="bad" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/neg3neg2.png"
+                                        alt="good" />
 
                                 </p>
 
 
                                 <h6>Discussion of results</h6>
-                                <p class="mb-5" style="text-align: left;"> I found that...:
+                                <p class="mb-5" style="text-align: left;"> I found that all my results were ~1 square
+                                    off. I attribute this to the fact that my spin isnt perfectly on axis even with my
+                                    modifications. The results were much better than before however so I chose to move
+                                    onto lab 12.
                                 </p>
                                 <br>
 
