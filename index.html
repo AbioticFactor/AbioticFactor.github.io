@@ -202,6 +202,18 @@
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
+                                Lab 12: Path Planning and Execution</div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/maze.png" alt="maze" />
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 13-->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal13">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white" style='font-size:36px;'>
                                 Reflection</div>
                         </div>
                         <img class="img-fluid" src="assets/img/portfolio/reflection.jpg" alt="reflection" />
@@ -1980,6 +1992,179 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 12:
+                                Path Planning and Execution</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Text-->
+                            <p class="mb-5" style="text-align: left;">The primary objective of this lab was to
+                                use all we have learned this semester to make a robot that can navigate through a
+                                set of waypoints quickly and effectively. I worked on this lab with fellow student
+                                Bhadra Bejoy, as
+                                the open lab hours queue for the maze became too long to feasibly finish this
+                                lab individually. It also helped that we had very similar approaches and just
+                                needed to test.</p>
+
+                            <h5>Lab Tasks</h5>
+                            <p style="text-align: left;">This lab involved completing the following tasks:</p>
+                            <ul>
+                                <li align="left">Planning</li>
+                                <li align="left">Positional PID for straights</li>
+                                <li align="left">Angular PID for turns</li>
+                                <li align="left">Control</li>
+                                <li align="left">Demo!</li>
+                            </ul>
+
+                            <h6>Planning</h6>
+                            <p class="mb-5" style="text-align: left;">We were tasked to use anything we learned in
+                                the class so far (mainly open loop motor control, closed loop PID control, Kalman
+                                filtering, and localization) to have a robot go through a maze and
+                                hit the given waypoints:
+                                <img class="img-fluid rounded mb-5" src="assets/img/lab12/waypoints.png"
+                                    alt="waypoints" />
+                            </p>
+                            <br>
+
+                            <p class="mb-5" style="text-align: left;">
+                                The first idea I ruled out was localization. Although I was able to vastly improve
+                                my results on localization from before, my results would still be around a square
+                                off. This would prove disastrous for the later waypoints where you would need to
+                                get around the box as precise control is needed to get around the box. Additionally,
+                                when my robot localizes, it doesn't stay on the exact same spot and the compounding
+                                errors could be terrible if it believes it is a bit off from where it really is and
+                                uses false distance values to get around.
+                            </p>
+                            <br>
+
+                            <p class="mb-5" style="text-align: left;">
+                                After flipping through past websites for inspiration, I found Ryan Chan's solution to
+                                be very doable and well thought out. I thought of combining his path approach, but
+                                instead of using open loop control for orientation control, I would finally go back
+                                and implement orientation control. I've always wanted to have it working after
+                                seeing videos on other people's websites being able to kick their robot and it coming
+                                back to the same spot, so I decided to give it a shot. My approach would be a
+                                predefined map along with PID orientation control. I give a map below of my plan:
+                                <img class="img-fluid rounded mb-5" src="assets/img/lab12/plan.png" alt="plan" />
+                            </p>
+                            <br>
+
+                            <p class="mb-5" style="text-align: left;">
+                                With more time, I would have liked to use the computer vision system I implemented
+                                and showed at robotics day to use April tags at various walls for localization. I
+                                already have the system in place for using camera output to control my robot, so it
+                                wouldn't have been too hard. The only issue is that it would be an additional thing
+                                to debug and I would have to modify the arena that other students were using.
+                            </p>
+
+
+                            <br>
+
+                            <h6>Positional PID for straights</h6>
+                            <p class="mb-5" style="text-align: left;">For the straight paths, I utilized my PID
+                                control from lab 6. I found that I had to give an additional buffer to actually reach
+                                the setpoint. This was probably a mixture of PID overshoot and time of flight error.
+
+                                <script
+                                    src="https://gist.github.com/AbioticFactor/919009ccd5a1860e291b7512ab4425f1.js"></script>
+                            </p>
+
+                            <h6>Angular PID for turns</h6>
+                            <p class="mb-5" style="text-align: left;"> The next step was to implement a way to
+                                complete our turns. Open loop was off the table as my robot rarely does the same
+                                thing every time I command it. On top of battery levels, my robot also seemed to
+                                just have inconsistent turns where open loop would just compound error. Previously, I
+                                used angular speed control for mapping out turns. I
+                                found this to be extremely untrustworthy for getting a precise angle (in my post
+                                processing code I would cut out angles past 360 degrees). So I decided to finally
+                                implement orientation control (the task I should have done for lab 6 looking back).
+                                With some simple testing, I found this to be a much better solution than open loop or
+                                angular speed control
+
+                                <script
+                                    src="https://gist.github.com/AbioticFactor/5e3dcce70cf75d4e34e3d1d491ae52db.js"></script>
+
+                            </p>
+
+                            <h6>Control</h6>
+                            <p class="mb-5" style="text-align: left;">The final part of the code was typing out the
+                                commands for our path in a sequence. The first commands we sent using physically
+                                measured
+                                values and precise angles were nowhere near the final ones I ended up with. After
+                                a bunch of testing and tuning, I found that almost every value needed to be adjusted
+                                at some point. I believe this is a result of sensor error + differing floor frictions
+                                from dust. This is an example of a set of commands used.
+
+                                <script
+                                    src="https://gist.github.com/AbioticFactor/f283683839f0549a5de09ce1b9908fb1.js"></script>
+
+                            </p>
+
+                            <h6>Demo!</h6>
+                            <p class="mb-5" style="text-align: left;"> In the end, I was able to complete the maze
+                                with only a couple hiccups. In this demo, we faced a couple hiccups, mainly at two
+                                spots where I believe the TOF sensor failed (common issue we've been facing) and a
+                                few spots where we over turned and had to correct. This is a video of our best
+                                consecutive run:
+                            </p>
+                            <p class="mb-5" style="text-align: left;">
+                                <iframe width="560" height="315" src="https://youtube.com/embed/U39YINiJh-Y"
+                                    frameborder="0" allowfullscreen></iframe>
+                            </p>
+                            <p class="mb-5" style="text-align: left;"> We do, however, have a pretty good spliced
+                                together video. I believe we could have gotten this in one run, but in testing, we had
+                                to do individual parts a lot of the time as the queue was very long for people
+                                waiting for the
+                                map, and thought it would be selfish to hog it as some of these tests can get very
+                                long. It got so bad that I worked with Ryan Chan to build a separate maze outside.
+                                In the end, we had a pretty good result with our strategy. I am most proud of how
+                                much better the turns are. If I could leave one piece of advice to future people
+                                taking this class: DON'T DO TASK A ON LAB 6, SAVE YOURSELF THE TROUBLE.
+                            </p>
+
+                            
+                            <p class="mb-5" style="text-align: left;">
+                                <iframe width="560" height="315" src="https://youtube.com/embed/OP5aWlwe5Ws"
+                                    frameborder="0" allowfullscreen></iframe>
+                            </p>
+
+                            <p class="mb-5" style="text-align: left;"> Overall, this was a great semester, and
+                                although it got to be quite a lot of work, it definitely feels rewarding to get it
+                                all done. Thank you so much to Kirstin, Ryan, Lemon, Anya, Joey, Alex, Cameron, and
+                                Jonathan for all of your help. Debugging other people's robot problems seems very
+                                hard. Another thank you for Demian and Bhadra for being my lab partners this
+                                semester. Good luck, future Fast-Robotiscists.
+                            </p>
+
+                            <br>
+
+                                <button class="btn btn-primary" data-bs-dismiss="modal">
+                                    <i class="fas fa-xmark fa-fw"></i>
+                                    Close Window
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 13-->
+    <div class="portfolio-modal modal fade" id="portfolioModal13" tabindex="-1" aria-labelledby="portfolioModal13"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
                                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 13:
                                     Reflection</h2>
@@ -2063,6 +2248,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
